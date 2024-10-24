@@ -7,7 +7,15 @@
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
+<<<<<<< HEAD
     "db-reset": "prisma migrate reset"
+=======
+    "prepare": "husky install",
+    "db-reset": "prisma migrate reset",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix",
+    "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc"
+>>>>>>> upstream/main
   },
   "prisma": {
     "seed": "node prisma/seed.js"
