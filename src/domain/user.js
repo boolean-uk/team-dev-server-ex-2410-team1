@@ -155,19 +155,16 @@ export default class User {
     const query = {
       include: {
         profile: true
-      }
-    }
-
-    if (key !== undefined && value !== undefined) {
-      query.where = {
+      },
+      where: {
         profile: {
           [key]: value
         }
       }
     }
 
+    // Remove conditionals to simplify and ensure `firstName` is applied directly
     const foundUsers = await dbClient.user.findMany(query)
-
     return foundUsers.map((user) => User.fromDb(user))
   }
 }
