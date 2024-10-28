@@ -130,6 +130,10 @@ export default class User {
     return User._findMany('firstName', firstName)
   }
 
+  static async findManyByLastName(lastName) {
+    return User._findMany('lastName', lastName)
+  }
+
   static async findAll() {
     return User._findMany()
   }
