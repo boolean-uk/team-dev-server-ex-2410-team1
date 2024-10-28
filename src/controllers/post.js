@@ -1,4 +1,5 @@
 import { sendDataResponse } from '../utils/responses.js'
+import Post from '../domain/post.js'
 
 export const create = async (req, res) => {
   const { content } = req.body
@@ -11,18 +12,21 @@ export const create = async (req, res) => {
 }
 
 export const getAll = async (req, res) => {
-  return sendDataResponse(res, 200, {
-    posts: [
-      {
-        id: 1,
-        content: 'Hello world!',
-        author: { ...req.user }
-      },
-      {
-        id: 2,
-        content: 'Hello from the void!',
-        author: { ...req.user }
-      }
-    ]
-  })
-}
+
+
+
+   try {
+     // Use the Post class to retrieve all posts
+     const foundPosts = await Post.findAll()
+
+     // Format the posts for the response
+     const formattedPosts = foundPosts.map((post) => post.toJSON())
+
+     return sendDataResponse(res, 200, { posts: formattedPosts })
+   } catch (error) {
+     console.error('Error fetching posts:', error)
+     return sendDataResponse(res, 500, { error: 'Failed to fetch posts' })
+   }
+ }
+
+
