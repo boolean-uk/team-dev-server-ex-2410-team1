@@ -254,4 +254,10 @@ export default class User {
 
     return User.fromDb(updatedUser)
   }
+
+  static async deleteById(id) {
+    return dbClient.user.delete({
+      where: { id }
+    })
+  }
 }
