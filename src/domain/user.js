@@ -196,4 +196,62 @@ export default class User {
 
     return foundUsers.map((user) => User.fromDb(user))
   }
+
+  /**
+   * Updates the user in the database with current instance values
+   * @returns {Promise<User>} Updated user instance
+   */
+  async update() {
+    const data = {
+      email: this.email,
+      role: this.role
+    }
+
+    if (this.passwordHash) {
+      data.password = this.passwordHash
+    }
+
+    data.profile = {
+      upsert: {
+        create: {
+          firstName: this.firstName,
+          lastName: this.lastName,
+          bio: this.bio,
+          githubUrl: this.githubUrl,
+          mobile: this.mobile,
+          specialism: this.specialism,
+          imageUrl: this.imageUrl
+        },
+        update: {
+          firstName: this.firstName,
+          lastName: this.lastName,
+          bio: this.bio,
+          githubUrl: this.githubUrl,
+          mobile: this.mobile,
+          specialism: this.specialism,
+          imageUrl: this.imageUrl
+        }
+      }
+    }
+
+    if (this.cohortId) {
+      data.cohort = {
+        connect: {
+          id: this.cohortId
+        }
+      }
+    }
+
+    const updatedUser = await dbClient.user.update({
+      where: {
+        id: this.id
+      },
+      data,
+      include: {
+        profile: true
+      }
+    })
+
+    return User.fromDb(updatedUser)
+  }
 }

@@ -56,12 +56,59 @@ export const getAll = async (req, res) => {
   return sendDataResponse(res, 200, { users: formattedUsers })
 }
 
+/**
+ * Updates a user by ID
+ * @param {import('express').Request} req Express request object
+ * @param {import('express').Response} res Express response object
+ */
 export const updateById = async (req, res) => {
-  const { cohort_id: cohortId } = req.body
+  try {
+    const userId = parseInt(req.params.id)
 
-  if (!cohortId) {
-    return sendDataResponse(res, 400, { cohort_id: 'Cohort ID is required' })
+    if (isNaN(userId)) {
+      return res.status(400).json({
+        error: 'Invalid user ID'
+      })
+    }
+
+    const existingUser = await User.findById(userId)
+    if (!existingUser) {
+      return res.status(404).json({
+        error: 'User not found'
+      })
+    }
+
+    const updates = req.body
+    const allowedUpdates = [
+      'firstName',
+      'lastName',
+      'email',
+      'bio',
+      'githubUrl',
+      'mobile',
+      'specialism',
+      'imageUrl',
+      'cohortId'
+    ]
+
+    allowedUpdates.forEach((field) => {
+      if (updates[field] !== undefined) {
+        existingUser[field] = updates[field]
+      }
+    })
+
+    if (updates.password) {
+      existingUser.passwordHash = await bcrypt.hash(updates.password, 8)
+    }
+
+    const updatedUser = await existingUser.update()
+
+    return res.json(updatedUser.toJSON())
+  } catch (error) {
+    console.error('Error updating user:', error)
+    return res.status(500).json({
+      error: 'Internal server error',
+      message: error.message
+    })
   }
-
-  return sendDataResponse(res, 201, { user: { cohort_id: cohortId } })
 }
