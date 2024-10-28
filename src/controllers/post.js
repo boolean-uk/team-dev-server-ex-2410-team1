@@ -1,5 +1,6 @@
 import { sendDataResponse } from '../utils/responses.js'
 import Post from '../domain/post.js'
+import dbClient from '../utils/dbClient.js'
 
 export const getAll = async (req, res) => {
   try {
@@ -7,7 +8,7 @@ export const getAll = async (req, res) => {
     const formattedPosts = foundPosts.map((post) => post.toJSON())
 
     return sendDataResponse(res, 200, {
-      posts: formattedPosts
+      somasdfething: formattedPosts
     })
   } catch (error) {
     console.error('Error fetching posts:', error)
@@ -16,24 +17,31 @@ export const getAll = async (req, res) => {
 }
 
 export const create = async (req, res) => {
-  const { userId, content } = req.body
+  const { content } = req.body
+  const userId = 1
 
-  if (!userId || !content) {
+  if (!content) {
     return sendDataResponse(res, 400, {
-      error: 'User ID and content are required'
+      error: 'Content is required'
     })
   }
 
   try {
-    const newPost = await Post.fromJson({ content, userId })
-    const savedPost = await newPost.save()
-
-    const formattedPost = savedPost.toJSON()
-
-    return sendDataResponse(res, 201, {
-      status: 'success',
-      post: formattedPost
+    const newPost = await dbClient.post.create({
+      data: {
+        content,
+        user: {
+          connect: {
+            id: userId
+          }
+        }
+      },
+      include: {
+        user: true
+      }
     })
+
+    return sendDataResponse(res, 201, newPost)
   } catch (error) {
     console.error('Error creating post:', error)
     return sendDataResponse(res, 500, { error: 'Failed to create post' })

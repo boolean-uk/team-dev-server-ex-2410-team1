@@ -20,9 +20,9 @@ export default class Post {
   static async fromJson(json) {
     const { content, authorId } = json
     return new Post(
-      null, 
+      null,
       content,
-      null, 
+      null,
       null, // updatedAt will also be set by the database
       authorId
     )
@@ -39,22 +39,21 @@ export default class Post {
 
   toJSON() {
     return {
-      
-        id: this.id,
-        content: this.content,
-        createdAt: this.createdAt,
-        updatedAt: this.updatedAt,
-        author: {
-          id: this.user.id,
-          cohortId: this.user.cohort?.id || null, 
-          firstName: this.user.profile?.firstName || null,
-          lastName: this.user.profile?.lastName || null,
-          email: this.user.email,
-          bio: this.user.profile?.bio || null,
-          githubUrl: this.user.profile?.githubUrl || null,
-          role: this.user.role
-        }
+      id: this.id,
+      content: this.content,
+      createdAt: this.createdAt,
+      updatedAt: this.updatedAt,
+      author: {
+        id: this.user.id,
+        cohortId: this.user.cohort?.id || null,
+        firstName: this.user.profile?.firstName || null,
+        lastName: this.user.profile?.lastName || null,
+        email: this.user.email,
+        bio: this.user.profile?.bio || null,
+        githubUrl: this.user.profile?.githubUrl || null,
+        role: this.user.role
       }
+    }
   }
 
   /**
@@ -74,7 +73,7 @@ export default class Post {
     const createdPost = await dbClient.post.create({
       data,
       include: {
-        author: true,
+        author: true
       }
     })
 
@@ -109,14 +108,14 @@ export default class Post {
 
   static async _findMany(key, value) {
     const query = {
-        include: {
-            user: {
-                include: {
-                    profile: true,
-                    cohort: true
-                }
-            }
+      include: {
+        user: {
+          include: {
+            profile: true,
+            cohort: true
+          }
         }
+      }
     }
 
     if (key !== undefined && value !== undefined) {
