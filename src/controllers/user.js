@@ -8,7 +8,7 @@ export const create = async (req, res) => {
     const existingUser = await User.findByEmail(userToCreate.email)
 
     if (existingUser) {
-      return sendDataResponse(res, 400, { email: 'Email already in use' })
+      return sendMessageResponse(res, 400, 'Email already in use')
     }
 
     const createdUser = await userToCreate.save()
@@ -26,7 +26,7 @@ export const getById = async (req, res) => {
     const foundUser = await User.findById(id)
 
     if (!foundUser) {
-      return sendDataResponse(res, 404, { id: 'User not found' })
+      return sendMessageResponse(res, 404, 'User not found')
     }
 
     return sendDataResponse(res, 200, foundUser)
@@ -66,16 +66,12 @@ export const updateById = async (req, res) => {
     const userId = parseInt(req.params.id)
 
     if (isNaN(userId)) {
-      return res.status(400).json({
-        error: 'Invalid user ID'
-      })
+      return sendMessageResponse(res, 400, 'Invalid user ID')
     }
 
     const existingUser = await User.findById(userId)
     if (!existingUser) {
-      return res.status(404).json({
-        error: 'User not found'
-      })
+      return sendMessageResponse(res, 404, 'User not found')
     }
 
     const updates = req.body
@@ -103,12 +99,12 @@ export const updateById = async (req, res) => {
 
     const updatedUser = await existingUser.update()
 
-    return res.json(updatedUser.toJSON())
+    // return res.json(updatedUser.toJSON())
+    return sendDataResponse(res, 200, updatedUser.toJSON())
   } catch (error) {
     console.error('Error updating user:', error)
-    return res.status(500).json({
-      error: 'Internal server error',
-      message: error.message
+    return sendDataResponse(res, 400, {
+      error: 'Internal server error'
     })
   }
 }

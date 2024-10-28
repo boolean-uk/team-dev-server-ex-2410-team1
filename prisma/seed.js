@@ -28,7 +28,7 @@ async function seed() {
     '123',
     'noob',
     'boolean.co.uk',
-    'TEACHER'
+    'TEACHER' // role
   )
 
   await createPost(student.id, 'My first post!')
