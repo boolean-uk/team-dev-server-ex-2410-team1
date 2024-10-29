@@ -8,7 +8,7 @@ export const getAll = async (req, res) => {
     const formattedPosts = foundPosts.map((post) => post.toJSON())
 
     return sendDataResponse(res, 200, {
-      somasdfething: formattedPosts
+      posts: formattedPosts
     })
   } catch (error) {
     console.error('Error fetching posts:', error)
