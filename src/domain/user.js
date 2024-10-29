@@ -18,15 +18,29 @@ export default class User {
       user.profile?.lastName,
       user.email,
       user.profile?.bio,
-      user.profile?.githubUrl,
+      user.profile?.githubUrl, // TODO: username
+      user.profile?.mobile,
+      user.profile?.specialism,
+      user.profile?.imageUrl,
       user.password,
       user.role
     )
   }
 
   static async fromJson(json) {
+    // TODO: get cohortId
     // eslint-disable-next-line camelcase
-    const { firstName, lastName, email, biography, githubUrl, password } = json
+    const {
+      firstName,
+      lastName,
+      email,
+      biography,
+      githubUrl,
+      mobile,
+      specialism,
+      imageUrl,
+      password
+    } = json
 
     const passwordHash = await bcrypt.hash(password, 8)
 
@@ -38,6 +52,9 @@ export default class User {
       email,
       biography,
       githubUrl,
+      mobile,
+      specialism,
+      imageUrl,
       passwordHash
     )
   }
@@ -50,6 +67,9 @@ export default class User {
     email,
     bio,
     githubUrl,
+    mobile,
+    specialism,
+    imageUrl,
     passwordHash = null,
     role = 'STUDENT'
   ) {
@@ -60,6 +80,9 @@ export default class User {
     this.email = email
     this.bio = bio
     this.githubUrl = githubUrl
+    this.mobile = mobile
+    this.specialism = specialism
+    this.imageUrl = imageUrl
     this.passwordHash = passwordHash
     this.role = role
   }
@@ -74,7 +97,10 @@ export default class User {
         lastName: this.lastName,
         email: this.email,
         biography: this.bio,
-        githubUrl: this.githubUrl
+        githubUrl: this.githubUrl,
+        mobile: this.mobile,
+        specialism: this.specialism,
+        imageUrl: this.imageUrl
       }
     }
   }
@@ -169,5 +195,74 @@ export default class User {
     const foundUsers = await dbClient.user.findMany(query)
 
     return foundUsers.map((user) => User.fromDb(user))
+  }
+
+  /**
+   * Updates the user in the database with current instance values
+   * @returns {Promise<User>} Updated user instance
+   */
+  async update() {
+    const data = {
+      email: this.email,
+      role: this.role
+    }
+
+    if (this.passwordHash) {
+      data.password = this.passwordHash
+    }
+
+    data.profile = {
+      upsert: {
+        create: {
+          firstName: this.firstName,
+          lastName: this.lastName,
+          bio: this.bio,
+          githubUrl: this.githubUrl,
+          mobile: this.mobile,
+          specialism: this.specialism,
+          imageUrl: this.imageUrl
+        },
+        update: {
+          firstName: this.firstName,
+          lastName: this.lastName,
+          bio: this.bio,
+          githubUrl: this.githubUrl,
+          mobile: this.mobile,
+          specialism: this.specialism,
+          imageUrl: this.imageUrl
+        }
+      }
+    }
+
+    if (this.cohortId) {
+      data.cohort = {
+        connect: {
+          id: this.cohortId
+        }
+      }
+    }
+
+    const updatedUser = await dbClient.user.update({
+      where: {
+        id: this.id
+      },
+      data,
+      include: {
+        profile: true
+      }
+    })
+
+    return User.fromDb(updatedUser)
+  }
+
+  static async deleteById(id) {
+    const deletedUser = await dbClient.user.delete({
+      where: { id },
+      include: {
+        profile: true
+      }
+    })
+
+    return User.fromDb(deletedUser)
   }
 }
