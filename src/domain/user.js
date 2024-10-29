@@ -257,14 +257,11 @@ export default class User {
 
   static async deleteById(id) {
     return dbClient.$transaction(async (tx) => {
-      // Then delete the user
-      await tx.user.delete({
-        where: { id }
-      })
-
-      // First delete the associated profile
-      return await tx.profile.delete({
-        where: { userId: id }
+      return await tx.user.delete({
+        where: { id },
+        include: {
+          profile: true
+        }
       })
     })
   }
