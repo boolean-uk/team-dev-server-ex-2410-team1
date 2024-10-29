@@ -22,6 +22,8 @@ export default class User {
       user.profile?.mobile,
       user.profile?.specialism,
       user.profile?.imageUrl,
+      user.profile?.startDate,
+      user.profile?.endDate,
       user.password,
       user.role
     )
@@ -29,32 +31,21 @@ export default class User {
 
   static async fromJson(json) {
     // TODO: get cohortId
-    // eslint-disable-next-line camelcase
-    const {
-      firstName,
-      lastName,
-      email,
-      biography,
-      githubUrl,
-      mobile,
-      specialism,
-      imageUrl,
-      password
-    } = json
-
-    const passwordHash = await bcrypt.hash(password, 8)
+    const passwordHash = await bcrypt.hash(json.password, 8)
 
     return new User(
       null,
       null,
-      firstName,
-      lastName,
-      email,
-      biography,
-      githubUrl,
-      mobile,
-      specialism,
-      imageUrl,
+      json.firstName,
+      json.lastName,
+      json.email,
+      json.biography,
+      json.githubUrl,
+      json.mobile,
+      json.specialism,
+      json.imageUrl,
+      json.startDate,
+      json.endDate,
       passwordHash
     )
   }
@@ -70,6 +61,8 @@ export default class User {
     mobile,
     specialism,
     imageUrl,
+    startDate = null,
+    endDate = null,
     passwordHash = null,
     role = 'STUDENT'
   ) {
@@ -83,6 +76,8 @@ export default class User {
     this.mobile = mobile
     this.specialism = specialism
     this.imageUrl = imageUrl
+    this.startDate = startDate
+    this.endDate = endDate
     this.passwordHash = passwordHash
     this.role = role
   }
@@ -100,7 +95,9 @@ export default class User {
         githubUrl: this.githubUrl,
         mobile: this.mobile,
         specialism: this.specialism,
-        imageUrl: this.imageUrl
+        imageUrl: this.imageUrl,
+        startDate: this.startDate,
+        endDate: this.endDate
       }
     }
   }
@@ -211,26 +208,22 @@ export default class User {
       data.password = this.passwordHash
     }
 
+    const updated = {
+      firstName: this.firstName,
+      lastName: this.lastName,
+      bio: this.bio,
+      githubUrl: this.githubUrl,
+      mobile: this.mobile,
+      specialism: this.specialism,
+      imageUrl: this.imageUrl,
+      startDate: this.startDate,
+      endDate: this.endDate
+    }
+
     data.profile = {
       upsert: {
-        create: {
-          firstName: this.firstName,
-          lastName: this.lastName,
-          bio: this.bio,
-          githubUrl: this.githubUrl,
-          mobile: this.mobile,
-          specialism: this.specialism,
-          imageUrl: this.imageUrl
-        },
-        update: {
-          firstName: this.firstName,
-          lastName: this.lastName,
-          bio: this.bio,
-          githubUrl: this.githubUrl,
-          mobile: this.mobile,
-          specialism: this.specialism,
-          imageUrl: this.imageUrl
-        }
+        create: updated,
+        update: updated
       }
     }
 

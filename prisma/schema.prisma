@@ -39,9 +39,8 @@ model Profile {
   mobile      String?
   specialism  String?
   imageUrl    String?
-  // TODO:
-  // startDate
-  // endDate
+  startDate   DateTime?
+  endDate     DateTime?
 }
 
 model Cohort {
