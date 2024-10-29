@@ -31,7 +31,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CreatedUser'
+                $ref: '#/components/schemas/User'
     get:
       tags:
         - user
@@ -157,7 +157,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CreatedUser'
+                $ref: '#/components/schemas/User'
         '401':
           description: fail
           content:
@@ -185,7 +185,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CreatedUser'
+                $ref: '#/components/schemas/User'
         '404':
           description: User not found
           content:
@@ -471,7 +471,7 @@ components:
                       profileImageUrl:
                         type: string
     
-    CreatedUser:
+    User:
       type: object
       properties:
         status:
