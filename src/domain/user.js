@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import dbClient from '../utils/dbClient.js'
 import bcrypt from 'bcrypt'
 
@@ -156,6 +157,38 @@ export default class User {
     return User._findMany('firstName', firstName)
   }
 
+  static async findManyByLastName(lastName) {
+    return User._findMany('lastName', lastName)
+  }
+
+  static async findByName(name) {
+    // Split the name into first and last name if it contains a space
+    let [firstName, lastName] = name.split(' ');
+    
+    // If it's a full name
+    if (lastName) {
+      let users = await User._findWithFullName({
+        firstName: firstName,
+        lastName: lastName
+      });
+      if (users.length > 0) {
+          return users; 
+      }
+    }
+    // If it's a single name
+    let users = await this.findManyByFirstName(name);
+    if (users.length > 0) {
+        return users;
+    } else {
+        users = await this.findManyByLastName(name);
+        if (users.length > 0) {
+            return users;
+        }
+    }
+
+    return null;
+  }
+
   static async findAll() {
     return User._findMany()
   }
@@ -196,6 +229,24 @@ export default class User {
 
     return foundUsers.map((user) => User.fromDb(user))
   }
+
+  static async _findWithFullName(where) {
+    const query = {
+        include: {
+            profile: true
+        }
+    };
+
+    if (where) {
+        query.where = {
+            profile: where
+        };
+    }
+
+    const foundUsers = await dbClient.user.findMany(query);
+
+    return foundUsers.map((user) => User.fromDb(user));
+}
 
   /**
    * Updates the user in the database with current instance values
@@ -266,3 +317,4 @@ export default class User {
     return User.fromDb(deletedUser)
   }
 }
+
