@@ -93,7 +93,7 @@ export const updateById = async (req, res) => {
       'lastName',
       'email',
       'bio',
-      'githubUrl',
+      'githubUsername',
       'mobile',
       'specialism',
       'imageUrl',

@@ -29,18 +29,18 @@ model User {
 }
 
 model Profile {
-  id          Int       @id @default(autoincrement())
-  userId      Int       @unique
-  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  firstName   String
-  lastName    String
-  bio         String?
-  githubUrl   String?
-  mobile      String?
-  specialism  String?
-  imageUrl    String?
-  startDate   DateTime?
-  endDate     DateTime?
+  id             Int       @id @default(autoincrement())
+  userId         Int       @unique
+  user           User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  firstName      String
+  lastName       String
+  bio            String?
+  githubUsername String?
+  mobile         String?
+  specialism     String?
+  imageUrl       String?
+  startDate      DateTime?
+  endDate        DateTime?
 }
 
 model Cohort {

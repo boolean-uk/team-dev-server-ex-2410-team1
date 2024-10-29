@@ -8,7 +8,7 @@ export default class User {
    * take as inputs, what types they return, and other useful information that JS doesn't have built in
    * @tutorial https://www.valentinog.com/blog/jsdoc
    *
-   * @param { { id: int, cohortId: int, email: string, profile: { firstName: string, lastName: string, bio: string, githubUrl: string } } } user
+   * @param { { id: int, cohortId: int, email: string, profile: { firstName: string, lastName: string, bio: string, githubUsername: string } } } user
    * @returns {User}
    */
   static fromDb(user) {
@@ -19,7 +19,7 @@ export default class User {
       user.profile?.lastName,
       user.email,
       user.profile?.bio,
-      user.profile?.githubUrl, // TODO: username
+      user.profile?.githubUsername,
       user.profile?.mobile,
       user.profile?.specialism,
       user.profile?.imageUrl,
@@ -41,7 +41,7 @@ export default class User {
       json.lastName,
       json.email,
       json.biography,
-      json.githubUrl,
+      json.githubUsername,
       json.mobile,
       json.specialism,
       json.imageUrl,
@@ -58,7 +58,7 @@ export default class User {
     lastName,
     email,
     bio,
-    githubUrl,
+    githubUsername,
     mobile,
     specialism,
     imageUrl,
@@ -73,7 +73,7 @@ export default class User {
     this.lastName = lastName
     this.email = email
     this.bio = bio
-    this.githubUrl = githubUrl
+    this.githubUsername = githubUsername
     this.mobile = mobile
     this.specialism = specialism
     this.imageUrl = imageUrl
@@ -93,7 +93,7 @@ export default class User {
         lastName: this.lastName,
         email: this.email,
         biography: this.bio,
-        githubUrl: this.githubUrl,
+        githubUsername: this.githubUsername,
         mobile: this.mobile,
         specialism: this.specialism,
         imageUrl: this.imageUrl,
@@ -128,7 +128,7 @@ export default class User {
           firstName: this.firstName,
           lastName: this.lastName,
           bio: this.bio,
-          githubUrl: this.githubUrl
+          githubUsername: this.githubUsername
         }
       }
     }
@@ -160,30 +160,30 @@ export default class User {
 
   static async findByName(name) {
     // Split the name into first and last name if it contains a space
-    let [firstName, lastName] = name.split(' ');
-    
+    let [firstName, lastName] = name.split(' ')
+
     // If it's a full name
     if (lastName) {
       let users = await User._findWithFullName({
         firstName: firstName,
         lastName: lastName
-      });
+      })
       if (users.length > 0) {
-          return users; 
+        return users
       }
     }
     // If it's a single name
-    let users = await this.findManyByFirstName(name);
+    let users = await this.findManyByFirstName(name)
     if (users.length > 0) {
-        return users;
+      return users
     } else {
-        users = await this.findManyByLastName(name);
-        if (users.length > 0) {
-            return users;
-        }
+      users = await this.findManyByLastName(name)
+      if (users.length > 0) {
+        return users
+      }
     }
 
-    return null;
+    return null
   }
 
   static async findAll() {
@@ -229,21 +229,21 @@ export default class User {
 
   static async _findWithFullName(where) {
     const query = {
-        include: {
-            profile: true
-        }
-    };
-
-    if (where) {
-        query.where = {
-            profile: where
-        };
+      include: {
+        profile: true
+      }
     }
 
-    const foundUsers = await dbClient.user.findMany(query);
+    if (where) {
+      query.where = {
+        profile: where
+      }
+    }
 
-    return foundUsers.map((user) => User.fromDb(user));
-}
+    const foundUsers = await dbClient.user.findMany(query)
+
+    return foundUsers.map((user) => User.fromDb(user))
+  }
 
   /**
    * Updates the user in the database with current instance values
@@ -263,7 +263,7 @@ export default class User {
       firstName: this.firstName,
       lastName: this.lastName,
       bio: this.bio,
-      githubUrl: this.githubUrl,
+      githubUsername: this.githubUsername,
       mobile: this.mobile,
       specialism: this.specialism,
       imageUrl: this.imageUrl,
@@ -310,4 +310,3 @@ export default class User {
     return User.fromDb(deletedUser)
   }
 }
-

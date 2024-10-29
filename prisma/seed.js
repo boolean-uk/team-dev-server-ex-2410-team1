@@ -11,7 +11,7 @@ async function seed() {
     cohort.id, // id
     'Joe', // first
     'Bloggs', // last
-    'Hello, world!', //bio
+    'Hello, world!', // bio
     'student1', // url
     '123', // mobile
     'pro', // spec
@@ -74,7 +74,7 @@ async function createUser(
   firstName,
   lastName,
   bio,
-  githubUrl,
+  githubUsername,
   mobile,
   specialism,
   imageUrl,
@@ -93,7 +93,7 @@ async function createUser(
           firstName,
           lastName,
           bio,
-          githubUrl,
+          githubUsername,
           mobile,
           specialism,
           imageUrl,
