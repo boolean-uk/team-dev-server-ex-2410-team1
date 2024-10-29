@@ -7,12 +7,10 @@ export const getAll = async (req, res) => {
     const foundPosts = await Post.findAll()
     const formattedPosts = foundPosts.map((post) => post.toJSON())
 
-    return sendDataResponse(res, 200, {
-      somasdfething: formattedPosts
-    })
+    return sendDataResponse(res, 200, formattedPosts)
   } catch (error) {
     console.error('Error fetching posts:', error)
-    return sendDataResponse(res, 500, { error: 'Failed to fetch posts' })
+    return sendDataResponse(res, 401, { error: 'fail' })
   }
 }
 
@@ -21,7 +19,7 @@ export const create = async (req, res) => {
   const userId = 1
 
   if (!content) {
-    return sendDataResponse(res, 400, {
+    return sendDataResponse(res, 404, {
       error: 'Content is required'
     })
   }
@@ -44,6 +42,6 @@ export const create = async (req, res) => {
     return sendDataResponse(res, 201, newPost)
   } catch (error) {
     console.error('Error creating post:', error)
-    return sendDataResponse(res, 500, { error: 'Failed to create post' })
+    return sendDataResponse(res, 400, { error: 'Failed to create post' })
   }
 }
