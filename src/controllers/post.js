@@ -47,3 +47,44 @@ export const create = async (req, res) => {
     return sendDataResponse(res, 400, { error: 'Failed to create post' })
   }
 }
+export const deletePost = async (req, res) => {
+  const postId = parseInt(req.params.id, 10)
+
+  // Check if the ID is valid
+  if (isNaN(postId)) {
+    return sendDataResponse(res, 400, {
+      status: 'error',
+      data: {
+        error: 'Invalid post ID'
+      }
+    })
+  }
+
+  try {
+    // Attempt to delete the post
+    const deletedPost = await Post.deleteById(postId)
+
+    // If the post does not exist
+    if (!deletedPost) {
+      return sendDataResponse(res, 404, {
+        status: 'error',
+        data: {
+          error: 'Post does not exist'
+        }
+      })
+    }
+
+    // Send a success response with the deleted post info
+    return sendDataResponse(res, 200, {
+      post: deletedPost
+    })
+  } catch (error) {
+    console.error('Error deleting post:', error)
+    return sendDataResponse(res, 500, {
+      status: 'error',
+      data: {
+        error: 'Internal server error'
+      }
+    })
+  }
+}
