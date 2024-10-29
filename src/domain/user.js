@@ -167,17 +167,14 @@ export default class User {
     
     // If it's a full name
     if (lastName) {
-      console.log("firstName: ", firstName, "lastName: ", lastName);
       let users = await User._findWithFullName({
         firstName: firstName,
         lastName: lastName
       });
-      console.log("users: ", users);
       if (users.length > 0) {
           return users; 
       }
     }
-    console.log("only one name")
     // If it's a single name
     let users = await this.findManyByFirstName(name);
     if (users.length > 0) {
