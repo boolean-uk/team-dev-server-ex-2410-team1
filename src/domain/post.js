@@ -128,4 +128,11 @@ export default class Post {
 
     return foundPosts.map((post) => Post.fromDb(post))
   }
+
+  static async deleteById(id) {
+    const deletedPost = await dbClient.post.delete({
+      where: { id }
+    })
+    return deletedPost
+  }
 }
