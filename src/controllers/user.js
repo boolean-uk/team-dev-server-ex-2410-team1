@@ -123,11 +123,10 @@ export const updateById = async (req, res) => {
  */
 export const deleteById = async (req, res) => {
   const id = parseInt(req.params.id)
-  const deleted = await User.deleteById(id)
-
-  if (!deleted) {
+  try {
+    return sendDataResponse(res, 200, await User.deleteById(id))
+  } catch (error) {
+    console.error('Error deleting user:', error)
     return sendMessageResponse(res, 404, 'User not found')
   }
-
-  return sendDataResponse(res, 200, deleted)
 }

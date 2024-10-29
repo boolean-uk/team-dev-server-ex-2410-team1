@@ -256,13 +256,11 @@ export default class User {
   }
 
   static async deleteById(id) {
-    return dbClient.$transaction(async (tx) => {
-      return await tx.user.delete({
-        where: { id },
-        include: {
-          profile: true
-        }
-      })
+    return await dbClient.user.delete({
+      where: { id },
+      include: {
+        profile: true
+      }
     })
   }
 }
