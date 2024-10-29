@@ -360,26 +360,6 @@ components:
               items:
                 $ref: '#/components/schemas/User'
 
-    User:
-      type: object
-      properties:
-        id:
-          type: integer
-        email:
-          type: string
-        role:
-          type: string
-        cohort_id:
-          type: integer
-        firstName:
-          type: string
-        lastName:
-          type: string
-        bio:
-          type: string
-        githubUrl:
-          type: string
-
     CreateUser:
       type: object
       properties:
@@ -391,7 +371,7 @@ components:
           type: string
         bio:
           type: string
-        githubUrl:
+        githubUsername:
           type: string
         password:
           type: string
@@ -419,7 +399,7 @@ components:
           type: string
         bio:
           type: string
-        githubUrl:
+        githubUsername:
           type: string
         mobile:
           type: string
@@ -466,11 +446,11 @@ components:
                         type: string
                       bio:
                         type: string
-                      githubUrl:
+                      githubUsername:
                         type: string
                       profileImageUrl:
                         type: string
-    
+
     User:
       type: object
       properties:
@@ -495,7 +475,7 @@ components:
                   type: string
                 bio:
                   type: string
-                githubUrl:
+                githubUsername:
                   type: string
                 mobile:
                   type: string
@@ -536,7 +516,7 @@ components:
                   type: string
                 bio:
                   type: string
-                githubUrl:
+                githubUsername:
                   type: string
     Error:
       type: object
