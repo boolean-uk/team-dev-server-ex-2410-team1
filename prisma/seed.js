@@ -15,7 +15,8 @@ async function seed() {
     'student1', // url
     '123', // mobile
     'pro', // spec
-    'boolean.co.uk', // url
+    'boolean.co.uk', // imageUrl
+    null, // jobTitle
     new Date('2024-01-01'), // startDate
     new Date('2024-06-01') // endDate
   )
@@ -30,6 +31,7 @@ async function seed() {
     '123',
     'noob',
     'boolean.co.uk',
+    'Software Engineer',
     null,
     null,
     'TEACHER' // role
@@ -78,6 +80,7 @@ async function createUser(
   mobile,
   specialism,
   imageUrl,
+  jobTitle,
   startDate,
   endDate,
   role = 'STUDENT'
@@ -97,6 +100,7 @@ async function createUser(
           mobile,
           specialism,
           imageUrl,
+          jobTitle,
           startDate,
           endDate
         }

@@ -23,6 +23,7 @@ export default class User {
       user.profile?.mobile,
       user.profile?.specialism,
       user.profile?.imageUrl,
+      user.profile?.jobTitle,
       user.profile?.startDate,
       user.profile?.endDate,
       user.password,
@@ -31,7 +32,6 @@ export default class User {
   }
 
   static async fromJson(json) {
-    // TODO: get cohortId
     const passwordHash = await bcrypt.hash(json.password, 8)
 
     return new User(
@@ -45,6 +45,7 @@ export default class User {
       json.mobile,
       json.specialism,
       json.imageUrl,
+      json.jobTitle,
       json.startDate,
       json.endDate,
       passwordHash
@@ -62,6 +63,7 @@ export default class User {
     mobile,
     specialism,
     imageUrl,
+    jobTitle = null,
     startDate = null,
     endDate = null,
     passwordHash = null,
@@ -77,6 +79,7 @@ export default class User {
     this.mobile = mobile
     this.specialism = specialism
     this.imageUrl = imageUrl
+    this.jobTitle = jobTitle
     this.startDate = startDate
     this.endDate = endDate
     this.passwordHash = passwordHash
@@ -97,6 +100,7 @@ export default class User {
         mobile: this.mobile,
         specialism: this.specialism,
         imageUrl: this.imageUrl,
+        jobTitle: this.jobTitle,
         startDate: this.startDate,
         endDate: this.endDate
       }
@@ -267,6 +271,7 @@ export default class User {
       mobile: this.mobile,
       specialism: this.specialism,
       imageUrl: this.imageUrl,
+      jobTitle: this.jobTitle,
       startDate: this.startDate,
       endDate: this.endDate
     }
