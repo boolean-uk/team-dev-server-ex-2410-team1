@@ -31,19 +31,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CreatedUser'
+                $ref: '#/components/schemas/User'
     get:
       tags:
         - user
-      summary: Get all users by first name if provided
+      summary: Get all users by name if provided
       description: ''
       operationId: getAllUsers
       security:
         - bearerAuth: []
       parameters:
-        - name: firstName
+        - name: name
           in: query
-          description: Search all users by first name if provided (case-sensitive and exact string matches only)
+          description: Search all users by name if provided (case-sensitive and exact string matches only) can be full name or only last or first name
           schema:
             type: string
       responses:
@@ -157,7 +157,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CreatedUser'
+                $ref: '#/components/schemas/User'
         '401':
           description: fail
           content:
@@ -185,7 +185,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CreatedUser'
+                $ref: '#/components/schemas/User'
         '404':
           description: User not found
           content:
@@ -409,26 +409,6 @@ components:
               items:
                 $ref: '#/components/schemas/User'
 
-    User:
-      type: object
-      properties:
-        id:
-          type: integer
-        email:
-          type: string
-        role:
-          type: string
-        cohort_id:
-          type: integer
-        firstName:
-          type: string
-        lastName:
-          type: string
-        bio:
-          type: string
-        githubUrl:
-          type: string
-
     CreateUser:
       type: object
       properties:
@@ -440,7 +420,7 @@ components:
           type: string
         bio:
           type: string
-        githubUrl:
+        githubUsername:
           type: string
         password:
           type: string
@@ -468,7 +448,7 @@ components:
           type: string
         bio:
           type: string
-        githubUrl:
+        githubUsername:
           type: string
         mobile:
           type: string
@@ -515,12 +495,12 @@ components:
                         type: string
                       bio:
                         type: string
-                      githubUrl:
+                      githubUsername:
                         type: string
                       profileImageUrl:
                         type: string
-    
-    CreatedUser:
+
+    User:
       type: object
       properties:
         status:
@@ -544,7 +524,7 @@ components:
                   type: string
                 bio:
                   type: string
-                githubUrl:
+                githubUsername:
                   type: string
                 mobile:
                   type: string
@@ -585,7 +565,7 @@ components:
                   type: string
                 bio:
                   type: string
-                githubUrl:
+                githubUsername:
                   type: string
     Error:
       type: object
