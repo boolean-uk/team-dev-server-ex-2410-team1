@@ -124,7 +124,9 @@ export const updateById = async (req, res) => {
 export const deleteById = async (req, res) => {
   const id = parseInt(req.params.id)
   try {
-    return sendDataResponse(res, 200, await User.deleteById(id))
+    const deleted = await User.deleteById(id)
+
+    return sendDataResponse(res, 200, deleted.toJSON())
   } catch (error) {
     console.error('Error deleting user:', error)
     return sendMessageResponse(res, 404, 'User not found')

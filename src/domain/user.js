@@ -256,11 +256,13 @@ export default class User {
   }
 
   static async deleteById(id) {
-    return await dbClient.user.delete({
+    const deletedUser = await dbClient.user.delete({
       where: { id },
       include: {
         profile: true
       }
     })
+
+    return User.fromDb(deletedUser)
   }
 }
