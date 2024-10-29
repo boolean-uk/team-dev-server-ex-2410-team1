@@ -165,11 +165,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
     delete:
-      summary: Delete a user by ID
-      description: Removes a user from the system using their unique identifier
-      operationId: removeById
       tags:
         - user
+      summary: Delete a user by ID
+      description: Removes a user from the system using their unique identifier
+      operationId: deleteById
+      security:
+        - bearerAuth: []
       parameters:
         - name: id
           in: path
@@ -178,46 +180,18 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
-          description: User successfully deleted
+        '201':
+          description: Successful operation
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  status:
-                    type: string
-                    enum: [success]
-                    example: success
-                  data:
-                    type: object
-                    properties:
-                      id:
-                        type: integer
-                        example: 123
-                      email:
-                        type: string
-                        example: "user@example.com"
-                required:
-                  - status
-                  - data
+                $ref: '#/components/schemas/CreatedUser'
         '404':
           description: User not found
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  status:
-                    type: string
-                    enum: [fail]
-                    example: fail
-                  message:
-                    type: string
-                    example: "User not found"
-                required:
-                  - status
-                  - message
+                $ref: '#/components/schemas/Error'
   /posts:
     post:
       tags:
