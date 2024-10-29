@@ -164,6 +164,60 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+    delete:
+      summary: Delete a user by ID
+      description: Removes a user from the system using their unique identifier
+      operationId: removeById
+      tags:
+        - user
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Unique identifier of the user
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: User successfully deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum: [success]
+                    example: success
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 123
+                      email:
+                        type: string
+                        example: "user@example.com"
+                required:
+                  - status
+                  - data
+        '404':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum: [fail]
+                    example: fail
+                  message:
+                    type: string
+                    example: "User not found"
+                required:
+                  - status
+                  - message
   /posts:
     post:
       tags:

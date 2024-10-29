@@ -121,7 +121,7 @@ export const updateById = async (req, res) => {
  * @param {import('express').Request} req Express request object
  * @param {import('express').Response} res Express response object
  */
-export const removeById = async (req, res) => {
+export const deleteById = async (req, res) => {
   const id = parseInt(req.params.id)
   const deleted = await User.deleteById(id)
 
