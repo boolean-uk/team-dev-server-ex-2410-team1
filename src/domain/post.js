@@ -135,4 +135,19 @@ export default class Post {
     })
     return deletedPost
   }
+
+  static async findByIdWithUser(id) {
+    const foundPost = await dbClient.post.findUnique({
+      where: { id },
+      include: {
+        user: {
+          include: {
+            profile: true,
+            cohort: true
+          }
+        }
+      }
+    })
+    return foundPost ? Post.fromDb(foundPost) : null
+  }
 }
