@@ -50,7 +50,6 @@ export const create = async (req, res) => {
 export const deletePost = async (req, res) => {
   const postId = parseInt(req.params.id, 10)
 
-  // Check if the ID is valid
   if (isNaN(postId)) {
     return sendDataResponse(res, 400, {
       status: 'error',
@@ -61,10 +60,8 @@ export const deletePost = async (req, res) => {
   }
 
   try {
-    // Attempt to delete the post
     const deletedPost = await Post.deleteById(postId)
 
-    // If the post does not exist
     if (!deletedPost) {
       return sendDataResponse(res, 404, {
         status: 'error',
@@ -74,12 +71,47 @@ export const deletePost = async (req, res) => {
       })
     }
 
-    // Send a success response with the deleted post info
     return sendDataResponse(res, 200, {
       post: deletedPost
     })
   } catch (error) {
     console.error('Error deleting post:', error)
+    return sendDataResponse(res, 500, {
+      status: 'error',
+      data: {
+        error: 'Internal server error'
+      }
+    })
+  }
+}
+
+export const getPostById = async (req, res) => {
+  const postId = parseInt(req.params.id, 10)
+
+  if (isNaN(postId)) {
+    return sendDataResponse(res, 400, {
+      status: 'error',
+      data: {
+        error: 'Invalid post ID'
+      }
+    })
+  }
+
+  try {
+    const post = await Post.findByIdWithUser(postId)
+
+    if (!post) {
+      return sendDataResponse(res, 404, {
+        status: 'error',
+        data: {
+          error: 'Post not found'
+        }
+      })
+    }
+
+    return sendDataResponse(res, 200, post.toJSON())
+  } catch (error) {
+    console.error('Error fetching post by ID:', error)
     return sendDataResponse(res, 500, {
       status: 'error',
       data: {
