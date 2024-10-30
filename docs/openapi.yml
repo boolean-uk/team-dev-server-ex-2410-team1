@@ -293,6 +293,47 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+      /posts/{id}:
+    get:
+      tags:
+        - post
+      summary: Get a post by ID
+      description: Retrieve a single post by its ID, including associated user details. This action can only be performed by a logged-in user.
+      operationId: getPostById
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the post to retrieve
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
+        '400':
+          description: Invalid ID supplied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Post not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
   /logs:
     post:
       tags:
