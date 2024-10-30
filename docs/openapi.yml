@@ -11,6 +11,8 @@ tags:
   - name: post
   - name: cohort
   - name: log
+  - name: comment # Added comment tag
+
 paths:
   /users:
     post:
@@ -334,6 +336,47 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+
+  
+  /posts/{id}/comments:
+    post:
+      tags:
+        - comment
+      summary: Create a comment for a post
+      description: Create a new comment associated with a specific post
+      operationId: createComment
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the post
+          schema:
+            type: integer
+      requestBody:
+        description: Comment creation details
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                content:
+                  type: string
+                authorId:
+                  type: integer
+      responses:
+        '201':
+          description: Comment created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
   /logs:
     post:
       tags:
@@ -436,6 +479,41 @@ components:
         updatedAt:
           type: string
           format: string
+
+    Comment:
+      type: object
+      properties:
+        id:
+          type: integer
+        content:
+          type: string
+        postId:
+          type: integer
+        author:
+          type: object
+          properties:
+            id:
+              type: integer
+            cohortId:
+              type: integer
+              nullable: true
+            firstName:
+              type: string
+              nullable: true
+            lastName:
+              type: string
+              nullable: true
+            email:
+              type: string
+            bio:
+              type: string
+              nullable: true
+            githubUrl:
+              type: string
+              nullable: true
+            role:
+              type: string
+              enum: [STUDENT, TEACHER]
 
     AllUsers:
       type: object

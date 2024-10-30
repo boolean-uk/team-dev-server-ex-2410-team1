@@ -1,10 +1,11 @@
+// controller/comments.js
+
 import { sendDataResponse } from '../utils/responses.js'
 import Comment from '../domain/comment.js'
 
 export const create = async (req, res) => {
-  const { content, authorId } = req.body
+  const { content, userId } = req.body // Ensure userId is provided here
   const postId = parseInt(req.params.id, 10)
-  const commentToCreate = new Comment(null, content, authorId, null, postId)
 
   if (!content) {
     return sendDataResponse(res, 400, {
@@ -12,7 +13,21 @@ export const create = async (req, res) => {
     })
   }
 
-  const createdComment = await commentToCreate.save()
+  if (!userId) {
+    return sendDataResponse(res, 400, {
+      error: 'User ID is required'
+    })
+  }
 
-  return sendDataResponse(res, 201, createdComment)
+  const commentToCreate = new Comment(null, content, userId, null, postId)
+
+  try {
+    const createdComment = await commentToCreate.save()
+    return sendDataResponse(res, 201, createdComment)
+  } catch (error) {
+    return sendDataResponse(res, 500, {
+      error: 'Error creating comment',
+      details: error.message
+    })
+  }
 }
