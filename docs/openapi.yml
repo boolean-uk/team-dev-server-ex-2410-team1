@@ -43,7 +43,7 @@ paths:
       parameters:
         - name: name
           in: query
-          description: Search all users by name if provided (case-sensitive and exact string matches only) can be full name or only last or first name
+          description: Search all users by name if provided, can be full name or only last or first name
           schema:
             type: string
       responses:
