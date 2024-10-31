@@ -57,7 +57,7 @@ export const getAll = async (req, res) => {
     foundUsers = await User.findAll()
   }
 
-  if (!foundUsers || foundUsers.length === 0) {
+  if (!foundUsers) {
     return sendMessageResponse(res, 404, 'User not found')
   }
 
