@@ -8,113 +8,108 @@ async function seed() {
   const student = await createUser(
     'student@test.com', // email
     'Testpassword1!', // password
-    cohort.id, // cohortId
-    'Joe', // firstName
-    'Bloggs', // lastName
+    cohort.id, // id
+    'Joe', // first
+    'Bloggs', // last
     'Hello, world!', // bio
-    'student1', // githubUsername
+    'student1', // url
     '123', // mobile
-    'pro', // specialism
+    'pro', // spec
     'boolean.co.uk', // imageUrl
     null, // jobTitle
     new Date('2024-01-01'), // startDate
     new Date('2024-06-01') // endDate
   )
-
   await createUser(
     'thomas@flier.com', // email
     'Melvin1!', // password
-    cohort.id, // cohortId
-    'Thomas', // firstName
-    'Flier', // lastName
+    cohort.id, // id
+    'Thomas', // first
+    'Flier', // last
     'Hello, world!', // bio
-    'student2', // githubUsername
+    'student2', // url
     '123', // mobile
-    'Backend Lead', // specialism
+    'Backend Lead', // spec
     'boolean.co.uk', // imageUrl
     null, // jobTitle
     new Date('2024-01-01'), // startDate
     new Date('2024-06-01') // endDate
   )
-
   await createUser(
     'joe@test.com', // email
     'Testpassword1!', // password
-    cohort.id, // cohortId
-    'Joe', // firstName
-    'Mama', // lastName
+    cohort.id, // id
+    'Joe', // first
+    'Mama', // last
     'Hello, world!', // bio
-    'student3', // githubUsername
+    'student3', // url
     '123', // mobile
-    'CSS goat', // specialism
+    'CSS goat', // spec
     'boolean.co.uk', // imageUrl
     null, // jobTitle
     new Date('2024-01-01'), // startDate
     new Date('2024-06-01') // endDate
   )
-
   await createUser(
     'dennis@test.com', // email
     'Melvin1!', // password
-    cohort.id, // cohortId
-    'Dennis', // firstName
-    'Osmani', // lastName
+    cohort.id, // id
+    'Dennis', // first
+    'Osmani', // last
     'Hello, world!', // bio
-    'student4', // githubUsername
+    'student4', // url
     '123', // mobile
-    'CSS goat', // specialism
+    'CSS goat', // spec
     'boolean.co.uk', // imageUrl
     null, // jobTitle
     new Date('2024-01-01'), // startDate
     new Date('2024-06-01') // endDate
   )
-
   await createUser(
     'student5@test.com', // email
     'Testpassword1!!', // password
-    cohort.id, // cohortId
-    'Rick', // firstName
-    'Owens', // lastName
+    cohort.id, // id
+    'Rick', // first
+    'Owens', // last
     'Hello, world!', // bio
-    'student5', // githubUsername
+    'student5', // url
     '123', // mobile
-    'Cloud engineer', // specialism    'boolean.co.uk', // imageUrl
+    'Cloud engineer', // spec
+    'boolean.co.uk', // imageUrl
     null, // jobTitle
     new Date('2024-01-01'), // startDate
     new Date('2024-06-01') // endDate
   )
-
   const teacher = await createUser(
-    'teacher@test.com', // email
-    'Testpassword1!', // password
-    null, // cohortId
-    'Rick', // firstName
-    'Sanchez', // lastName
-    'Hello there!', // bio
-    'teacher1', // githubUsername
-    '123', // mobile
-    'noob', // specialism
-    'boolean.co.uk', // imageUrl
-    'Software Engineer', // jobTitle
-    null, // startDate
-    null, // endDate
+    'teacher@test.com',
+    'Testpassword1!',
+    null,
+    'Rick',
+    'Sanchez',
+    'Hello there!',
+    'teacher1',
+    '123',
+    'noob',
+    'boolean.co.uk',
+    'Software Engineer',
+    null,
+    null,
     'TEACHER' // role
   )
-
   await createUser(
-    'teacher2@test.com', // email
-    'Testpassword1!', // password
-    null, // cohortId
-    'Gordon', // firstName
-    'Bleu', // lastName
-    'Hello there!', // bio
-    'teacher2', // githubUsername
-    '123', // mobile
-    'pro', // specialism
-    'boolean.co.uk', // imageUrl
-    'Software Engineer', // jobTitle
-    null, // startDate
-    null, // endDate
+    'teacher2@test.com',
+    'Testpassword1!',
+    null,
+    'Gordon',
+    'Bleu',
+    'Hello there!',
+    'teacher1',
+    '123',
+    'pro',
+    'boolean.co.uk',
+    'Software Engineer',
+    null,
+    null,
     'TEACHER' // role
   )
 
