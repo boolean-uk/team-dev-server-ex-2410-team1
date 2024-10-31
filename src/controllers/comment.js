@@ -2,6 +2,7 @@
 
 import { sendDataResponse } from '../utils/responses.js'
 import Comment from '../domain/comment.js'
+import Post from '../domain/post.js'
 
 export const create = async (req, res) => {
   const { content, userId } = req.body // Ensure userId is provided here
@@ -42,6 +43,15 @@ export const GetAllByPostId = async (req, res) => {
   }
 
   try {
+    // Check if the post exists
+    const postExists = await doesPostExist(postId)
+    if (!postExists) {
+      return sendDataResponse(res, 404, {
+        error: `Post with ID ${postId} does not exist`
+      })
+    }
+
+    // If the post exists, fetch comments
     const comments = await Comment.findByPostId(postId)
     return sendDataResponse(res, 200, comments)
   } catch (error) {
@@ -49,5 +59,15 @@ export const GetAllByPostId = async (req, res) => {
       error: 'Error fetching comments',
       details: error.message
     })
+  }
+}
+
+async function doesPostExist(postId) {
+  try {
+    const post = await Post.findById(postId)
+    return post !== null
+  } catch (error) {
+    console.error('Error checking post existence:', error)
+    return false
   }
 }
