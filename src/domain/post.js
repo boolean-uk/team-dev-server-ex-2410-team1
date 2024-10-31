@@ -96,6 +96,14 @@ export default class Post {
     const foundPost = await dbClient.post.findUnique({
       where: {
         [key]: value
+      },
+      include: {
+        user: {
+          include: {
+            profile: true,
+            cohort: true
+          }
+        }
       }
     })
 
@@ -149,5 +157,22 @@ export default class Post {
       }
     })
     return foundPost ? Post.fromDb(foundPost) : null
+  }
+
+  static async updateById(id, data) {
+    const updatedPost = await dbClient.post.update({
+      where: { id },
+      data,
+      include: {
+        user: {
+          include: {
+            profile: true,
+            cohort: true
+          }
+        }
+      }
+    })
+
+    return updatedPost ? Post.fromDb(updatedPost) : null
   }
 }

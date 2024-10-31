@@ -2,13 +2,11 @@
 import dbClient from '../utils/dbClient.js'
 import bcrypt from 'bcrypt'
 
-
 /* helper functions */
 
 function capitalize(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+  return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase()
 }
-
 
 export default class User {
   /**
@@ -63,17 +61,17 @@ export default class User {
   }
 
   constructor(
-    id,
-    cohortId,
-    firstName,
-    lastName,
-    email,
-    bio,
-    githubUsername,
-    username,
-    mobile,
-    specialism,
-    imageUrl,
+    id = null,
+    cohortId = null,
+    firstName = null,
+    lastName = null,
+    email = null,
+    bio = null,
+    githubUsername = null,
+    username = null,
+    mobile = null,
+    specialism = null,
+    imageUrl = null,
     jobTitle = null,
     startDate = null,
     endDate = null,
@@ -144,7 +142,12 @@ export default class User {
           lastName: this.lastName,
           bio: this.bio,
           githubUsername: this.githubUsername,
-          username: this.username
+          username: this.username,
+          specialism: this.specialism,
+          imageUrl: this.imageUrl,
+          jobTitle: this.jobTitle,
+          startDate: this.startDate,
+          endDate: this.endDate
         }
       }
     }

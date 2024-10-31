@@ -53,7 +53,7 @@ export const deletePost = async (req, res) => {
   const postId = parseInt(req.params.id, 10)
 
   if (isNaN(postId)) {
-    return sendDataResponse(res, 400, {
+    return res.status(400).json({
       status: 'error',
       data: {
         error: 'Invalid post ID'
@@ -65,7 +65,7 @@ export const deletePost = async (req, res) => {
     const deletedPost = await Post.deleteById(postId)
 
     if (!deletedPost) {
-      return sendDataResponse(res, 404, {
+      return res.status(404).json({
         status: 'error',
         data: {
           error: 'Post does not exist'
@@ -73,17 +73,12 @@ export const deletePost = async (req, res) => {
       })
     }
 
-    return sendDataResponse(res, 200, {
-      post: deletedPost
+    return res.status(200).json({
+      status: 'success',
+      message: 'Post deleted successfully'
     })
   } catch (error) {
     console.error('Error deleting post:', error)
-    return sendDataResponse(res, 500, {
-      status: 'error',
-      data: {
-        error: 'Internal server error'
-      }
-    })
   }
 }
 
@@ -91,7 +86,7 @@ export const getPostById = async (req, res) => {
   const postId = parseInt(req.params.id, 10)
 
   if (isNaN(postId)) {
-    return sendDataResponse(res, 400, {
+    return res.status(400).json({
       status: 'error',
       data: {
         error: 'Invalid post ID'
@@ -103,7 +98,7 @@ export const getPostById = async (req, res) => {
     const post = await Post.findByIdWithUser(postId)
 
     if (!post) {
-      return sendDataResponse(res, 404, {
+      return res.status(404).json({
         status: 'error',
         data: {
           error: 'Post not found'
@@ -111,14 +106,59 @@ export const getPostById = async (req, res) => {
       })
     }
 
-    return sendDataResponse(res, 200, post.toJSON())
+    return res.status(200).json({
+      status: 'success',
+      data: post.toJSON(), 
+    })
   } catch (error) {
     console.error('Error fetching post by ID:', error)
-    return sendDataResponse(res, 500, {
+  }
+}
+
+export const updatePost = async (req, res) => {
+  const postId = parseInt(req.params.id, 10)
+  const { content } = req.body
+
+  if (isNaN(postId)) {
+    return res.status(400).json({
       status: 'error',
       data: {
-        error: 'Internal server error'
+        error: 'Invalid post ID'
       }
     })
+  }
+
+  if (!content) {
+    return res.status(400).json({
+      status: 'error',
+      data: {
+        error: 'Content is required'
+      }
+    })
+  }
+
+  try {
+    const updatedPost = await Post.updateById(postId, { content })
+
+    if (!updatedPost) {
+      return res.status(404).json({
+        status: 'error',
+        data: {
+          error: 'Post not found'
+        }
+      })
+    }
+
+    return res.status(200).json({
+      status: 'success',
+      data: {
+        post: {
+          id: updatedPost.id,
+          content: updatedPost.content
+        }
+      }
+    })
+  } catch (error) {
+    console.error('Error updating post:', error)
   }
 }
