@@ -1,5 +1,4 @@
-import { createCohort } from '../domain/cohort.js'
-import User from '../domain/user.js'
+import { Cohort, createCohort } from '../domain/cohort.js'
 import { sendDataResponse, sendMessageResponse } from '../utils/responses.js'
 
 /**
@@ -22,17 +21,14 @@ export const create = async (req, res) => {
  * @param {import('express').Request} req
  * @param {import('express').Response} res
  */
-export const getById = async (req, res) => {
-  // TODO: not User.findAll()
+export const getCohortUsersById = async (req, res) => {
   const id = parseInt(req.params.id)
 
   try {
-    const allUsers = await User.findAll()
-
-    const usersWithCohortId = allUsers.filter((user) => user.cohortId === id)
-
-    return sendDataResponse(res, 200, usersWithCohortId)
-  } catch (e) {
+    const users = await Cohort.findManyUsersByCohortId(id)
+    return sendDataResponse(res, 200, users)
+  } catch (error) {
+    console.error('Error getting users by cohort:', error)
     return sendMessageResponse(res, 500, 'Internal server error')
   }
 }

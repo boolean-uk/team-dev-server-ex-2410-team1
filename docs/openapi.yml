@@ -404,7 +404,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 
-  /cohorts/{id}:
+  /cohorts/{id}/users:
     get:
       tags:
         - cohort
