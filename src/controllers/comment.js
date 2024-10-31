@@ -42,7 +42,7 @@ export const GetAllByPostId = async (req, res) => {
   }
 
   try {
-    const comments = await Comment.findAllByPostId(postId)
+    const comments = await Comment.findByPostId(postId)
     return sendDataResponse(res, 200, comments)
   } catch (error) {
     return sendDataResponse(res, 500, {
