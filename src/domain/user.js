@@ -206,7 +206,7 @@ export default class User {
       }
     }
 
-    return null
+    return []
   }
 
   static async findAll() {
