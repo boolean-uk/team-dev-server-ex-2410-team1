@@ -572,6 +572,34 @@ components:
                   type: integer
                 content:
                   type: string
+    Comment:
+      type: object
+      properties:
+        status:
+          type: string
+        data:
+          properties:
+            comments:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    description: Unique identifier for the comment
+                  content:
+                    type: string
+                    description: Text content of the comment
+                  createdAt:
+                    type: string
+                    format: date-time
+                    description: Date and time when the comment was created
+                  updatedAt:
+                    type: string
+                    format: date-time
+                    description: Date and time when the comment was last updated
+                  user:
+                    $ref: '#/components/schemas/User'
 
     Cohort:
       type: object
