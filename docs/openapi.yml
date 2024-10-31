@@ -585,26 +585,50 @@ components:
               properties:
                 id:
                   type: integer
-                email:
-                  type: string
-                cohort_id:
+                userId:
                   type: integer
-                role:
-                  type: string
                 firstName:
                   type: string
                 lastName:
                   type: string
                 bio:
                   type: string
+                  nullable: true
                 githubUsername:
                   type: string
+                  nullable: true
+                username:
+                  type: string
+                  nullable: true
                 mobile:
                   type: string
+                  nullable: true
                 specialism:
                   type: string
+                  nullable: true
                 imageUrl:
                   type: string
+                  nullable: true
+                jobTitle:
+                  type: string
+                  nullable: true
+                startDate:
+                  type: string
+                  format: date-time
+                  nullable: true
+                  description: ISO 8601 date-time string
+                  example: "2024-10-31T14:30:00Z"
+                endDate:
+                  type: string
+                  format: date-time
+                  nullable: true
+                  description: ISO 8601 date-time string
+                  example: "2024-12-31T23:59:59Z"
+              required:
+                - id
+                - userId
+                - firstName
+                - lastName
     login:
       type: object
       properties:
