@@ -96,6 +96,22 @@ async function seed() {
     null,
     'TEACHER' // role
   )
+  await createUser(
+    'teacher2@test.com',
+    'Testpassword1!',
+    null,
+    'Gordon',
+    'Bleu',
+    'Hello there!',
+    'teacher1',
+    '123',
+    'pro',
+    'boolean.co.uk',
+    'Software Engineer',
+    null,
+    null,
+    'TEACHER' // role
+  )
 
   await createPost(student.id, 'My first post!')
   await createPost(teacher.id, 'Hello, students')
