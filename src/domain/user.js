@@ -2,6 +2,14 @@
 import dbClient from '../utils/dbClient.js'
 import bcrypt from 'bcrypt'
 
+
+/* helper functions */
+
+function capitalize(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+}
+
+
 export default class User {
   /**
    * This is JSDoc - a way for us to tell other developers what types functions/methods
@@ -155,10 +163,12 @@ export default class User {
   }
 
   static async findManyByFirstName(firstName) {
+    firstName = capitalize(firstName)
     return User._findMany('firstName', firstName)
   }
 
   static async findManyByLastName(lastName) {
+    lastName = capitalize(lastName)
     return User._findMany('lastName', lastName)
   }
 
@@ -168,6 +178,8 @@ export default class User {
 
     // If it's a full name
     if (lastName) {
+      firstName = capitalize(firstName)
+      lastName = capitalize(lastName)
       let users = await User._findWithFullName({
         firstName: firstName,
         lastName: lastName
