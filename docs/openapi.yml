@@ -287,8 +287,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-
-  /posts/{id}:
     get:
       tags:
         - post
@@ -421,9 +419,9 @@ paths:
                   status:
                     type: string
                   data:
-                    properties:
-                      cohort:
-                        $ref: '#/components/schemas/Users'
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/User'
 
 components:
   securitySchemes:
@@ -464,12 +462,9 @@ components:
         status:
           type: string
         data:
-          type: object
-          properties:
-            users:
-              type: array
-              items:
-                $ref: '#/components/schemas/User'
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
 
     CreateUser:
       type: object
