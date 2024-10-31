@@ -20,6 +20,21 @@ async function seed() {
     new Date('2024-01-01'), // startDate
     new Date('2024-06-01') // endDate
   )
+  await createUser(
+    'student2@test.com', // email
+    'Testpassword1!', // password
+    cohort.id, // id
+    'Thomas', // first
+    'Flier', // last
+    'Hello, world!', // bio
+    'student2', // url
+    '123', // mobile
+    'Cloud Engineer', // spec
+    'boolean.co.uk', // imageUrl
+    null, // jobTitle
+    new Date('2024-01-01'), // startDate
+    new Date('2024-06-01') // endDate
+  )
   const teacher = await createUser(
     'teacher@test.com',
     'Testpassword1!',
