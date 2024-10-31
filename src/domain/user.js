@@ -2,13 +2,19 @@
 import dbClient from '../utils/dbClient.js'
 import bcrypt from 'bcrypt'
 
+/* helper functions */
+
+function capitalize(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase()
+}
+
 export default class User {
   /**
    * This is JSDoc - a way for us to tell other developers what types functions/methods
    * take as inputs, what types they return, and other useful information that JS doesn't have built in
    * @tutorial https://www.valentinog.com/blog/jsdoc
    *
-   * @param { { id: int, cohortId: int, email: string, profile: { firstName: string, lastName: string, bio: string, githubUsername: string } } } user
+   * @param { { id: int, cohortId: int, email: string, profile: { firstName: string, lastName: string, bio: string, githubUsername: string, username: string } } } user
    * @returns {User}
    */
   static fromDb(user) {
@@ -20,6 +26,7 @@ export default class User {
       user.email,
       user.profile?.bio,
       user.profile?.githubUsername,
+      user.profile?.username,
       user.profile?.mobile,
       user.profile?.specialism,
       user.profile?.imageUrl,
@@ -42,6 +49,7 @@ export default class User {
       json.email,
       json.biography,
       json.githubUsername,
+      json.username,
       json.mobile,
       json.specialism,
       json.imageUrl,
@@ -53,16 +61,17 @@ export default class User {
   }
 
   constructor(
-    id,
-    cohortId,
-    firstName,
-    lastName,
-    email,
-    bio,
-    githubUsername,
-    mobile,
-    specialism,
-    imageUrl,
+    id = null,
+    cohortId = null,
+    firstName = null,
+    lastName = null,
+    email = null,
+    bio = null,
+    githubUsername = null,
+    username = null,
+    mobile = null,
+    specialism = null,
+    imageUrl = null,
     jobTitle = null,
     startDate = null,
     endDate = null,
@@ -76,6 +85,7 @@ export default class User {
     this.email = email
     this.bio = bio
     this.githubUsername = githubUsername
+    this.username = username
     this.mobile = mobile
     this.specialism = specialism
     this.imageUrl = imageUrl
@@ -88,22 +98,21 @@ export default class User {
 
   toJSON() {
     return {
-      user: {
-        id: this.id,
-        cohort_id: this.cohortId,
-        role: this.role,
-        firstName: this.firstName,
-        lastName: this.lastName,
-        email: this.email,
-        biography: this.bio,
-        githubUsername: this.githubUsername,
-        mobile: this.mobile,
-        specialism: this.specialism,
-        imageUrl: this.imageUrl,
-        jobTitle: this.jobTitle,
-        startDate: this.startDate,
-        endDate: this.endDate
-      }
+      id: this.id,
+      cohort_id: this.cohortId,
+      role: this.role,
+      firstName: this.firstName,
+      lastName: this.lastName,
+      email: this.email,
+      biography: this.bio,
+      githubUsername: this.githubUsername,
+      username: this.username,
+      mobile: this.mobile,
+      specialism: this.specialism,
+      imageUrl: this.imageUrl,
+      jobTitle: this.jobTitle,
+      startDate: this.startDate,
+      endDate: this.endDate
     }
   }
 
@@ -132,7 +141,13 @@ export default class User {
           firstName: this.firstName,
           lastName: this.lastName,
           bio: this.bio,
-          githubUsername: this.githubUsername
+          githubUsername: this.githubUsername,
+          username: this.username,
+          specialism: this.specialism,
+          imageUrl: this.imageUrl,
+          jobTitle: this.jobTitle,
+          startDate: this.startDate,
+          endDate: this.endDate
         }
       }
     }
@@ -155,10 +170,12 @@ export default class User {
   }
 
   static async findManyByFirstName(firstName) {
+    firstName = capitalize(firstName)
     return User._findMany('firstName', firstName)
   }
 
   static async findManyByLastName(lastName) {
+    lastName = capitalize(lastName)
     return User._findMany('lastName', lastName)
   }
 
@@ -168,6 +185,8 @@ export default class User {
 
     // If it's a full name
     if (lastName) {
+      firstName = capitalize(firstName)
+      lastName = capitalize(lastName)
       let users = await User._findWithFullName({
         firstName: firstName,
         lastName: lastName
@@ -268,6 +287,7 @@ export default class User {
       lastName: this.lastName,
       bio: this.bio,
       githubUsername: this.githubUsername,
+      username: this.username,
       mobile: this.mobile,
       specialism: this.specialism,
       imageUrl: this.imageUrl,
