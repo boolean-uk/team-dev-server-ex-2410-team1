@@ -56,6 +56,8 @@ model Post {
   id       Int       @id @default(autoincrement())
   content  String
   userId   Int
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
   user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   comments Comment[] @relation("PostComments")
 }
@@ -65,8 +67,6 @@ model Comment {
   content String
   userId  Int
   user    User          @relation(fields: [userId], references: [id], onDelete: Cascade)
-  createdAt DateTime    @default(now())
-  updatedAt DateTime    @updatedAt
   postId  Int
   post    Post   @relation("PostComments", fields: [postId], references: [id], onDelete: Cascade)
 }
