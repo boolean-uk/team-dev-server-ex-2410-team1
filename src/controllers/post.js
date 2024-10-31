@@ -108,7 +108,7 @@ export const getPostById = async (req, res) => {
 
     return res.status(200).json({
       status: 'success',
-      data: post.toJSON(), 
+      data: post.toJSON()
     })
   } catch (error) {
     console.error('Error fetching post by ID:', error)
