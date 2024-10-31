@@ -11,7 +11,7 @@ tags:
   - name: post
   - name: cohort
   - name: log
-  - name: comment # Added comment tag
+  - name: comment
 
 paths:
   /users:
@@ -55,13 +55,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Users'
-        '400':
+        400:
           description: fail
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        '404':
+        404:
           description: fail
           content:
             application/json:
@@ -558,9 +558,6 @@ components:
           type: string
         password:
           type: string
-        role:
-          type: string
-
 
     UpdateUser:
       type: object
