@@ -80,4 +80,46 @@ export default class Comment {
 
     return Comment.fromDb(createdComment)
   }
+
+  static async findByPostId(postId) {
+    try {
+      const foundComments = await dbClient.comment.findMany({
+        where: { postId },
+        include: {
+          user: true,
+          post: true
+        }
+      })
+
+      return foundComments.map((comment) => Comment.fromDb(comment))
+    } catch (error) {
+      console.error('Error finding comments by post ID:', error)
+      throw new Error('Error finding comments by post ID')
+    }
+  }
 }
+
+//   static async findAll() {
+//     return Comment._findManyByPost()
+//   }
+
+//   static async _findManyByPost(key, value) {
+//     const query = {
+//       include: {
+//         profile: true
+//       }
+//     }
+
+//     if (key !== undefined && value !== undefined) {
+//       query.where = {
+//         profile: {
+//           [key]: value
+//         }
+//       }
+//     }
+
+//     const foundUsers = await dbClient.user.findMany(query)
+
+//     return foundUsers.map((comment) => Comment.fromDb(comment))
+//   }
+// }
