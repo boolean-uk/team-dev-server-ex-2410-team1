@@ -55,6 +55,8 @@ model Post {
   id      Int           @id @default(autoincrement())
   content String
   userId  Int
+  createdAt DateTime
+  updatedAt DateTime
   user    User          @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 

@@ -30,6 +30,8 @@ export const create = async (req, res) => {
     const newPost = await dbClient.post.create({
       data: {
         content,
+        createdAt: new Date(),
+        updatedAt: new Date(),
         user: {
           connect: {
             id: userId

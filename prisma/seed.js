@@ -8,108 +8,113 @@ async function seed() {
   const student = await createUser(
     'student@test.com', // email
     'Testpassword1!', // password
-    cohort.id, // id
-    'Joe', // first
-    'Bloggs', // last
+    cohort.id, // cohortId
+    'Joe', // firstName
+    'Bloggs', // lastName
     'Hello, world!', // bio
-    'student1', // url
+    'student1', // githubUsername
     '123', // mobile
-    'pro', // spec
+    'pro', // specialism
     'boolean.co.uk', // imageUrl
     null, // jobTitle
     new Date('2024-01-01'), // startDate
     new Date('2024-06-01') // endDate
   )
+
   await createUser(
     'thomas@flier.com', // email
     'Melvin1!', // password
-    cohort.id, // id
-    'Thomas', // first
-    'Flier', // last
+    cohort.id, // cohortId
+    'Thomas', // firstName
+    'Flier', // lastName
     'Hello, world!', // bio
-    'student2', // url
+    'student2', // githubUsername
     '123', // mobile
-    'Backend Lead', // spec
+    'Backend Lead', // specialism
     'boolean.co.uk', // imageUrl
     null, // jobTitle
     new Date('2024-01-01'), // startDate
     new Date('2024-06-01') // endDate
   )
+
   await createUser(
     'joe@test.com', // email
     'Testpassword1!', // password
-    cohort.id, // id
-    'Joe', // first
-    'Mama', // last
+    cohort.id, // cohortId
+    'Joe', // firstName
+    'Mama', // lastName
     'Hello, world!', // bio
-    'student3', // url
+    'student3', // githubUsername
     '123', // mobile
-    'CSS goat', // spec
+    'CSS goat', // specialism
     'boolean.co.uk', // imageUrl
     null, // jobTitle
     new Date('2024-01-01'), // startDate
     new Date('2024-06-01') // endDate
   )
+
   await createUser(
     'dennis@test.com', // email
     'Melvin1!', // password
-    cohort.id, // id
-    'Dennis', // first
-    'Osmani', // last
+    cohort.id, // cohortId
+    'Dennis', // firstName
+    'Osmani', // lastName
     'Hello, world!', // bio
-    'student4', // url
+    'student4', // githubUsername
     '123', // mobile
-    'CSS goat', // spec
+    'CSS goat', // specialism
     'boolean.co.uk', // imageUrl
     null, // jobTitle
     new Date('2024-01-01'), // startDate
     new Date('2024-06-01') // endDate
   )
+
   await createUser(
     'student5@test.com', // email
     'Testpassword1!!', // password
-    cohort.id, // id
-    'Rick', // first
-    'Owens', // last
+    cohort.id, // cohortId
+    'Rick', // firstName
+    'Owens', // lastName
     'Hello, world!', // bio
-    'student5', // url
+    'student5', // githubUsername
     '123', // mobile
-    'Cloud engineer', // spec
-    'boolean.co.uk', // imageUrl
+    'Cloud engineer', // specialism    'boolean.co.uk', // imageUrl
     null, // jobTitle
     new Date('2024-01-01'), // startDate
     new Date('2024-06-01') // endDate
   )
+
   const teacher = await createUser(
-    'teacher@test.com',
-    'Testpassword1!',
-    null,
-    'Rick',
-    'Sanchez',
-    'Hello there!',
-    'teacher1',
-    '123',
-    'noob',
-    'boolean.co.uk',
-    'Software Engineer',
-    null,
-    null,
+    'teacher@test.com', // email
+    'Testpassword1!', // password
+    null, // cohortId
+    'Rick', // firstName
+    'Sanchez', // lastName
+    'Hello there!', // bio
+    'teacher1', // githubUsername
+    '123', // mobile
+    'noob', // specialism
+    'boolean.co.uk', // imageUrl
+    'Software Engineer', // jobTitle
+    null, // startDate
+    null, // endDate
     'TEACHER' // role
   )
+
   await createUser(
-    'teacher2@test.com',
-    'Testpassword1!',
-    null,
-    'Gordon',
-    'Bleu',
-    'Hello there!',
-    'teacher1',
-    '123',
-    'pro',
-    'boolean.co.uk',
-    'Software Engineer',
-    null,
-    null,
+    'teacher2@test.com', // email
+    'Testpassword1!', // password
+    null, // cohortId
+    'Gordon', // firstName
+    'Bleu', // lastName
+    'Hello there!', // bio
+    'teacher2', // githubUsername
+    '123', // mobile
+    'pro', // specialism
+    'boolean.co.uk', // imageUrl
+    'Software Engineer', // jobTitle
+    null, // startDate
+    null, // endDate
     'TEACHER' // role
   )
 
@@ -123,7 +128,9 @@ async function createPost(userId, content) {
   const post = await prisma.post.create({
     data: {
       userId,
-      content
+      content,
+      createdAt: new Date(),
+      updatedAt: new Date()
     },
     include: {
       user: true
