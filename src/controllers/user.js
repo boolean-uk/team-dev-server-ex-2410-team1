@@ -62,13 +62,9 @@ export const getAll = async (req, res) => {
     return sendMessageResponse(res, 404, 'User not found')
   }
 
-  const formattedUsers = foundUsers.map((user) => {
-    return {
-      ...user.toJSON().user
-    }
-  })
+  const formattedUsers = foundUsers.map((user) => user.toJSON())
 
-  return sendDataResponse(res, 200, { users: formattedUsers })
+  return sendDataResponse(res, 200, formattedUsers)
 }
 
 /**

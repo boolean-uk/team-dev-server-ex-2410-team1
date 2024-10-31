@@ -92,23 +92,21 @@ export default class User {
 
   toJSON() {
     return {
-      user: {
-        id: this.id,
-        cohort_id: this.cohortId,
-        role: this.role,
-        firstName: this.firstName,
-        lastName: this.lastName,
-        email: this.email,
-        biography: this.bio,
-        githubUsername: this.githubUsername,
-        username: this.username,
-        mobile: this.mobile,
-        specialism: this.specialism,
-        imageUrl: this.imageUrl,
-        jobTitle: this.jobTitle,
-        startDate: this.startDate,
-        endDate: this.endDate
-      }
+      id: this.id,
+      cohort_id: this.cohortId,
+      role: this.role,
+      firstName: this.firstName,
+      lastName: this.lastName,
+      email: this.email,
+      biography: this.bio,
+      githubUsername: this.githubUsername,
+      username: this.username,
+      mobile: this.mobile,
+      specialism: this.specialism,
+      imageUrl: this.imageUrl,
+      jobTitle: this.jobTitle,
+      startDate: this.startDate,
+      endDate: this.endDate
     }
   }
 
