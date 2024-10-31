@@ -37,6 +37,7 @@ model Profile {
   lastName       String
   bio            String?
   githubUsername String?
+  username       String?
   mobile         String?
   specialism     String?
   imageUrl       String?

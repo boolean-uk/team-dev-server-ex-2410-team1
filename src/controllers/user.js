@@ -1,6 +1,5 @@
 import User from '../domain/user.js'
 import bcrypt from 'bcrypt'
-import { validateTeacherRole } from '../middleware/auth.js'
 import { sendDataResponse, sendMessageResponse } from '../utils/responses.js'
 
 /**
@@ -62,13 +61,17 @@ export const getAll = async (req, res) => {
     return sendMessageResponse(res, 404, 'User not found')
   }
 
-  const formattedUsers = foundUsers.map((user) => {
-    return {
-      ...user.toJSON().user
-    }
-  })
+  const formattedUsers = foundUsers.map((user) => user.toJSON())
 
-  return sendDataResponse(res, 200, { users: formattedUsers })
+  return sendDataResponse(res, 200, formattedUsers)
+}
+
+const studentUpdatingOther = (req) => {
+  return req.user.id !== parseInt(req.params.id) && req.user.role === 'STUDENT'
+}
+
+const studentUpdatingIllegalFields = (req) => {
+  return (req.body.cohort_id || req.body.role) && req.user.role === 'STUDENT'
 }
 
 /**
@@ -90,39 +93,43 @@ export const updateById = async (req, res) => {
     }
 
     const updates = req.body
-    const updateUnchecked = async () => {
-      if (updates.password) {
-        existingUser.passwordHash = await bcrypt.hash(updates.password, 8)
+
+    if (studentUpdatingOther(req) || studentUpdatingIllegalFields(req)) {
+      return sendMessageResponse(
+        res,
+        403,
+        'You are not authorized to perform this action'
+      )
+    }
+
+    if (updates.password) {
+      existingUser.passwordHash = await bcrypt.hash(updates.password, 8)
+    }
+
+    ;[
+      'id',
+      'cohortId',
+      'firstName',
+      'lastName',
+      'email',
+      'bio',
+      'githubUsername',
+      'mobile',
+      'specialism',
+      'imageUrl',
+      'jobTitle',
+      'startDate',
+      'endDate',
+      'password',
+      'role'
+    ].forEach((field) => {
+      if (updates[field] !== undefined) {
+        existingUser[field] = updates[field]
       }
+    })
 
-      ;[
-        'firstName',
-        'lastName',
-        'email',
-        'bio',
-        'githubUsername',
-        'mobile',
-        'specialism',
-        'imageUrl',
-        'startDate',
-        'endDate',
-        'role'
-      ].forEach((field) => {
-        if (updates[field] !== undefined) {
-          existingUser[field] = updates[field]
-        }
-      })
-
-      const updatedUser = await existingUser.update()
-      return sendDataResponse(res, 201, updatedUser.toJSON())
-    }
-
-    if (updates.cohort_id || updates.role) {
-      // If user attempts to update privileged fields, validate theyre a teacher before updating
-      return validateTeacherRole(req, res, updateUnchecked)
-    } else {
-      updateUnchecked()
-    }
+    const updatedUser = await existingUser.update()
+    return sendDataResponse(res, 201, updatedUser.toJSON())
   } catch (error) {
     console.error('Error updating user:', error)
     return sendMessageResponse(res, 500, 'Internal server error')
