@@ -31,3 +31,23 @@ export const create = async (req, res) => {
     })
   }
 }
+
+export const GetAllByPostId = async (req, res) => {
+  const postId = parseInt(req.params.id, 10)
+
+  if (isNaN(postId)) {
+    return sendDataResponse(res, 400, {
+      error: 'Invalid post ID'
+    })
+  }
+
+  try {
+    const comments = await Comment.findAllByPostId(postId)
+    return sendDataResponse(res, 200, comments)
+  } catch (error) {
+    return sendDataResponse(res, 500, {
+      error: 'Error fetching comments',
+      details: error.message
+    })
+  }
+}
