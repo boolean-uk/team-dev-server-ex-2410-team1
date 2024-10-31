@@ -11,8 +11,6 @@ tags:
   - name: post
   - name: cohort
   - name: log
-  - name: comment
-
 paths:
   /users:
     post:
@@ -28,12 +26,12 @@ paths:
             schema:
               $ref: '#/components/schemas/CreateUser'
       responses:
-        '201':
+        201:
           description: Created
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
+                $ref: '#/components/schemas/userRes'
     get:
       tags:
         - user
@@ -49,7 +47,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        200:
           description: successful operation
           content:
             application/json:
@@ -81,14 +79,14 @@ paths:
             schema:
               $ref: '#/components/schemas/login'
       responses:
-        '200':
+        200:
           description: OK
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/loginRes'
 
-        '400':
+        400:
           description: Invalid username/password supplied
 
   /users/{id}:
@@ -108,7 +106,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        200:
           description: successful operation
           content:
             application/json:
@@ -154,14 +152,14 @@ paths:
             schema:
               $ref: '#/components/schemas/UpdateUser'
       responses:
-        '201':
+        201:
           description: Successful operation
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
-        '401':
-          description: fail
+        401:
+          description: Unauthorized
           content:
             application/json:
               schema:
@@ -182,7 +180,7 @@ paths:
           schema:
             type: integer
       responses:
-        '201':
+        201:
           description: Successful operation
           content:
             application/json:
@@ -234,14 +232,14 @@ paths:
       security:
         - bearerAuth: []
       responses:
-        '200':
+        200:
           description: Successful operation
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Posts'
-        '401':
-          description: fail
+        401:
+          description: Unauthorized
           content:
             application/json:
               schema:
@@ -264,7 +262,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        200:
           description: Post deleted successfully
           content:
             application/json:
@@ -277,25 +275,18 @@ paths:
                   message:
                     type: string
                     example: Post deleted successfully
-        '400':
+        400:
           description: Invalid ID supplied
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        '404':
+        404:
           description: Post not found
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        '500':
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-      /posts/{id}:
     get:
       tags:
         - post
@@ -312,26 +303,64 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        200:
           description: Successful operation
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Post'
-        '400':
+        400:
           description: Invalid ID supplied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        404:
+          description: Post not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      tags:
+        - post
+      summary: Update a post
+      description: Edit a post by its ID. This action can only be performed by the post owner or an admin.
+      operationId: updatePost
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the post to edit
+          schema:
+            type: integer
+      requestBody:
+        description: Updated post content
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                content:
+                  type: string
+      responses:
+        '200':
+          description: Post updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
+        '400':
+          description: Invalid input
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
         '404':
           description: Post not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '500':
-          description: Internal server error
           content:
             application/json:
               schema:
@@ -376,7 +405,7 @@ paths:
           description: Bad request
         '401':
           description: Unauthorized
-    get: # Added GET method to retrieve comments
+    get:
       tags:
         - comment
       summary: Get all comments for a post
@@ -421,6 +450,7 @@ paths:
                   message:
                     type: string
                     example: Comments not found for the specified post
+
   /logs:
     post:
       tags:
@@ -455,8 +485,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Log'
-        '401':
-          description: Unauthorised
+        401:
+          description: Unauthorized
           content:
             application/json:
               schema:
@@ -518,9 +548,9 @@ paths:
                   status:
                     type: string
                   data:
-                    properties:
-                      cohort:
-                        $ref: '#/components/schemas/Users'
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/User'
 
 components:
   securitySchemes:
@@ -555,67 +585,20 @@ components:
           type: string
           format: string
 
-    Comment:
-      type: object
-      properties:
-        id:
-          type: integer
-        content:
-          type: string
-        postId:
-          type: integer
-        author:
-          type: object
-          properties:
-            id:
-              type: integer
-            cohortId:
-              type: integer
-              nullable: true
-            firstName:
-              type: string
-              nullable: true
-            lastName:
-              type: string
-              nullable: true
-            email:
-              type: string
-            bio:
-              type: string
-              nullable: true
-            githubUrl:
-              type: string
-              nullable: true
-            role:
-              type: string
-              enum: [STUDENT, TEACHER]
-
-    # TODO: FIX THIS TYPE (duplicate status in each User)
     Users:
       type: object
       properties:
         status:
           type: string
         data:
-          type: object
-          properties:
-            users:
-              type: array
-              items:
-                $ref: '#/components/schemas/User'
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
 
     CreateUser:
       type: object
       properties:
-        firstName:
-          type: string
-        lastName:
-          type: string
         email:
-          type: string
-        bio:
-          type: string
-        githubUsername:
           type: string
         password:
           type: string
@@ -692,35 +675,68 @@ components:
     User:
       type: object
       properties:
+        id:
+          type: integer
+        cohort_id:
+          type: integer
+        role:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        biography:
+          type: string
+          nullable: true
+        githubUsername:
+          type: string
+          nullable: true
+        username:
+          type: string
+          nullable: true
+        mobile:
+          type: string
+          nullable: true
+        specialism:
+          type: string
+          nullable: true
+        imageUrl:
+          type: string
+          nullable: true
+        jobTitle:
+          type: string
+          nullable: true
+        startDate:
+          type: string
+          format: date-time
+          nullable: true
+          description: ISO 8601 date-time string
+          example: "2024-10-31T14:30:00Z"
+        endDate:
+          type: string
+          format: date-time
+          nullable: true
+          description: ISO 8601 date-time string
+          example: "2024-12-31T23:59:59Z"
+      required:
+        - id
+        - userId
+        - firstName
+        - lastName
+
+    userRes:
+      type: object
+      properties:
         status:
           type: string
-          example: success
         data:
+          type: object
           properties:
             user:
-              properties:
-                id:
-                  type: integer
-                email:
-                  type: string
-                cohort_id:
-                  type: integer
-                role:
-                  type: string
-                firstName:
-                  type: string
-                lastName:
-                  type: string
-                bio:
-                  type: string
-                githubUsername:
-                  type: string
-                mobile:
-                  type: string
-                specialism:
-                  type: string
-                imageUrl:
-                  type: string
+              $ref: '#/components/schemas/User'
+
     login:
       type: object
       properties:
