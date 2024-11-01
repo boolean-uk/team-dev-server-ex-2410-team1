@@ -86,7 +86,12 @@ export default class Comment {
       const foundComments = await dbClient.comment.findMany({
         where: { postId },
         include: {
-          user: true,
+          user: {
+            // Ensure to include user relation
+            include: {
+              profile: true // Include profile to access firstName
+            }
+          },
           post: true
         }
       })
