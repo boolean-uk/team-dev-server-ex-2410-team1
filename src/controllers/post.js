@@ -18,7 +18,7 @@ export const getAll = async (req, res) => {
 
 export const create = async (req, res) => {
   const { content } = req.body
-  const userId = 1
+  const userId = req.user.id
 
   if (!content) {
     return sendDataResponse(res, 404, {

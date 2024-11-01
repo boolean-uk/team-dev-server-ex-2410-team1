@@ -6,113 +6,263 @@ async function seed() {
   const cohort = await createCohort()
 
   const student = await createUser(
-    'student@test.com', // email
-    'Testpassword1!', // password
-    cohort.id, // id
-    'Joe', // first
-    'Bloggs', // last
-    'Hello, world!', // bio
-    'student1', // url
-    '123', // mobile
-    'pro', // spec
-    'boolean.co.uk', // imageUrl
-    null, // jobTitle
-    new Date('2024-01-01'), // startDate
-    new Date('2024-06-01') // endDate
-  )
-  await createUser(
-    'thomas@flier.com', // email
-    'Melvin1!', // password
-    cohort.id, // id
-    'Thomas', // first
-    'Flier', // last
-    'Hello, world!', // bio
-    'student2', // url
-    '123', // mobile
-    'Backend Lead', // spec
-    'boolean.co.uk', // imageUrl
-    null, // jobTitle
-    new Date('2024-01-01'), // startDate
-    new Date('2024-06-01') // endDate
-  )
-  await createUser(
-    'joe@test.com', // email
-    'Testpassword1!', // password
-    cohort.id, // id
-    'Joe', // first
-    'Mama', // last
-    'Hello, world!', // bio
-    'student3', // url
-    '123', // mobile
-    'CSS goat', // spec
-    'boolean.co.uk', // imageUrl
-    null, // jobTitle
-    new Date('2024-01-01'), // startDate
-    new Date('2024-06-01') // endDate
-  )
-  await createUser(
-    'dennis@test.com', // email
-    'Melvin1!', // password
-    cohort.id, // id
-    'Dennis', // first
-    'Osmani', // last
-    'Hello, world!', // bio
-    'student4', // url
-    '123', // mobile
-    'CSS goat', // spec
-    'boolean.co.uk', // imageUrl
-    null, // jobTitle
-    new Date('2024-01-01'), // startDate
-    new Date('2024-06-01') // endDate
-  )
-  await createUser(
-    'student5@test.com', // email
-    'Testpassword1!!', // password
-    cohort.id, // id
-    'Rick', // first
-    'Owens', // last
-    'Hello, world!', // bio
-    'student5', // url
-    '123', // mobile
-    'Cloud engineer', // spec
-    'boolean.co.uk', // imageUrl
-    null, // jobTitle
-    new Date('2024-01-01'), // startDate
-    new Date('2024-06-01') // endDate
-  )
-  const teacher = await createUser(
-    'teacher@test.com',
+    'ibrahima@demo.com',
     'Testpassword1!',
-    null,
-    'Rick',
+    cohort.id,
+    'Ibrahima',
+    'Secka',
+    'Hello, world!',
+    'student1',
+    'student1',
+    '123',
+    'student',
+    'boolean.co.uk',
+    'Backend',
+    new Date('2024-01-01'),
+    new Date('2024-06-01')
+  );
+  
+  await createUser(
+    'ali@demo.com',
+    'Testpassword1!',
+    cohort.id,
+    'Ali',
+    'Yeganeh',
+    'Hello, world!',
+    'student2',
+    'student2',
+    '123',
+    'student',
+    'boolean.co.uk',
+    'Backend',
+    new Date('2024-01-01'),
+    new Date('2024-06-01')
+  );
+  
+  await createUser(
+    'herman@demo.com',
+    'Testpassword1!',
+    cohort.id,
+    'Herman',
+    'Stornes',
+    'Hello, world!',
+    'student3',
+    'student3',
+    '123',
+    'student',
+    'boolean.co.uk',
+    'Backend',
+    new Date('2024-01-01'),
+    new Date('2024-06-01')
+  );
+  
+  await createUser(
+    'alikhan@demo.com',
+    'Testpassword1!',
+    cohort.id,
+    'Ali',
+    'Khan',
+    'Hello, world!',
+    'student4',
+    'student4',
+    '123',
+    'student',
+    'boolean.co.uk',
+    'Backend',
+    new Date('2024-01-01'),
+    new Date('2024-06-01')
+  );
+  
+  await createUser(
+    'daniil@demo.com',
+    'Testpassword1!',
+    cohort.id,
+    'Daniil',
+    'Panfilov',
+    'Hello, world!',
+    'student5',
+    'student5',
+    '123',
+    'student',
+    'boolean.co.uk',
+    'Backend',
+    new Date('2024-01-01'),
+    new Date('2024-06-01')
+  );
+  
+  await createUser(
+    'george@demo.com',
+    'Testpassword1!',
+    cohort.id,
+    'George',
+    'Saveendra',
+    'Hello, world!',
+    'student6',
+    'student6',
+    '123',
+    'student',
+    'boolean.co.uk',
+    'Backend Lead',
+    new Date('2024-01-01'),
+    new Date('2024-06-01')
+  );
+  
+  await createUser(
+    'julia@demo.com',
+    'Testpassword1!',
+    cohort.id,
+    'Julia',
+    'Lindgren',
+    'Hello, world!',
+    'student7',
+    'student7',
+    '123',
+    'student',
+    'boolean.co.uk',
+    'Frontend',
+    new Date('2024-01-01'),
+    new Date('2024-06-01')
+  );
+  
+  await createUser(
+    'kaja@demo.com',
+    'Testpassword1!',
+    cohort.id,
+    'Kaja',
+    'Plaszko',
+    'Hello, world!',
+    'student8',
+    'student8',
+    '123',
+    'student',
+    'boolean.co.uk',
+    'Frontend',
+    new Date('2024-01-01'),
+    new Date('2024-06-01')
+  );
+  
+  await createUser(
+    'dag@demo.com',
+    'Testpassword1!',
+    cohort.id,
+    'Dag',
+    'Foss',
+    'Hello, world!',
+    'student9',
+    'student9',
+    '123',
+    'student',
+    'boolean.co.uk',
+    'Frontend',
+    new Date('2024-01-01'),
+    new Date('2024-06-01')
+  );
+  
+  await createUser(
+    'melvin@demo.com',
+    'Testpassword1!',
+    cohort.id,
+    'Melvin',
+    'Uthayaseelan',
+    'Hello, world!',
+    'student10',
+    'student10',
+    '123',
+    'student',
+    'boolean.co.uk',
+    'Frontend',
+    new Date('2024-01-01'),
+    new Date('2024-06-01')
+  );
+  
+  await createUser(
+    'bjørg@demo.com',
+    'Testpassword1!',
+    cohort.id,
+    'Bjørg',
+    'Kristiansen',
+    'Hello, world!',
+    'student11',
+    'student11',
+    '123',
+    'student',
+    'boolean.co.uk',
+    'Frontend',
+    new Date('2024-01-01'),
+    new Date('2024-06-01')
+  );
+  
+  await createUser(
+    'dennis@demo.com',
+    'Testpassword1!',
+    cohort.id,
+    'Dennis',
+    'Osmani',
+    'Hello, world!',
+    'student12',
+    'student12',
+    '123',
+    'student',
+    'boolean.co.uk',
+    'Frontend',
+    new Date('2024-01-01'),
+    new Date('2024-06-01')
+  );
+  
+  const teacher = await createUser(
+    'jostein@demo.com',
+    'Testpassword1!',
+    cohort.id,
+    'Jostein Ruen',
     'Sanchez',
     'Hello there!',
     'teacher1',
-    '123',
-    'noob',
-    'boolean.co.uk',
-    'Software Engineer',
-    null,
-    null,
-    'TEACHER' // role
-  )
-  await createUser(
-    'teacher2@test.com',
-    'Testpassword1!',
-    null,
-    'Gordon',
-    'Bleu',
-    'Hello there!',
     'teacher1',
     '123',
-    'pro',
+    'Scrum Master',
     'boolean.co.uk',
-    'Software Engineer',
+    'Teacher',
     null,
     null,
-    'TEACHER' // role
-  )
-
+    'TEACHER'
+  );
+  
+  await createUser(
+    'thomas@demo.com',
+    'Testpassword1!',
+    cohort.id,
+    'Thomas',
+    'Flier',
+    'thugger free',
+    'teacher2',
+    'teacher2',
+    '123',
+    'Backend Lead',
+    'boolean.co.uk',
+    'Teacher',
+    null,
+    null,
+    'TEACHER'
+  );
+  
+  await createUser(
+    'john@demo.com',
+    'Testpassword1!',
+    cohort.id,
+    'John',
+    'Abueg',
+    'Hello there!',
+    'teacher3',
+    'teacher3',
+    '123',
+    'Frontend Lead',
+    'boolean.co.uk',
+    'Teacher',
+    null,
+    null,
+    'TEACHER'
+  );
+  
   await createPost(student.id, 'My first post!')
   await createPost(teacher.id, 'Hello, students')
 
@@ -155,6 +305,7 @@ async function createUser(
   lastName,
   bio,
   githubUsername,
+  username,
   mobile,
   specialism,
   imageUrl,
@@ -175,6 +326,7 @@ async function createUser(
           lastName,
           bio,
           githubUsername,
+          username,
           mobile,
           specialism,
           imageUrl,
