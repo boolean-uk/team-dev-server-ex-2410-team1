@@ -15,9 +15,9 @@ async function seed() {
     'student1',
     'student1',
     '123',
-    'student',
-    'boolean.co.uk',
     'Backend',
+    'boolean.co.uk',
+    'student',
     new Date('2024-01-01'),
     new Date('2024-06-01')
   );
@@ -32,9 +32,9 @@ async function seed() {
     'student2',
     'student2',
     '123',
-    'student',
-    'boolean.co.uk',
     'Backend',
+    'boolean.co.uk',
+    'student',
     new Date('2024-01-01'),
     new Date('2024-06-01')
   );
@@ -49,9 +49,9 @@ async function seed() {
     'student3',
     'student3',
     '123',
-    'student',
-    'boolean.co.uk',
     'Backend',
+    'boolean.co.uk',
+    'student',
     new Date('2024-01-01'),
     new Date('2024-06-01')
   );
@@ -66,9 +66,9 @@ async function seed() {
     'student4',
     'student4',
     '123',
-    'student',
-    'boolean.co.uk',
     'Backend',
+    'boolean.co.uk',
+    'student',
     new Date('2024-01-01'),
     new Date('2024-06-01')
   );
@@ -83,9 +83,9 @@ async function seed() {
     'student5',
     'student5',
     '123',
-    'student',
-    'boolean.co.uk',
     'Backend',
+    'boolean.co.uk',
+    'student',
     new Date('2024-01-01'),
     new Date('2024-06-01')
   );
@@ -94,15 +94,15 @@ async function seed() {
     'george@demo.com',
     'Testpassword1!',
     cohort.id,
-    'George',
+    'George Alexander',
     'Saveendra',
     'Hello, world!',
     'student6',
     'student6',
     '123',
-    'student',
-    'boolean.co.uk',
     'Backend Lead',
+    'boolean.co.uk',
+    'student',
     new Date('2024-01-01'),
     new Date('2024-06-01')
   );
@@ -117,9 +117,9 @@ async function seed() {
     'student7',
     'student7',
     '123',
-    'student',
-    'boolean.co.uk',
     'Frontend',
+    'boolean.co.uk',
+    'student',
     new Date('2024-01-01'),
     new Date('2024-06-01')
   );
@@ -134,9 +134,9 @@ async function seed() {
     'student8',
     'student8',
     '123',
-    'student',
-    'boolean.co.uk',
     'Frontend',
+    'boolean.co.uk',
+    'student',
     new Date('2024-01-01'),
     new Date('2024-06-01')
   );
@@ -145,15 +145,15 @@ async function seed() {
     'dag@demo.com',
     'Testpassword1!',
     cohort.id,
-    'Dag',
+    'Dag Andreas',
     'Foss',
     'Hello, world!',
     'student9',
     'student9',
     '123',
-    'student',
-    'boolean.co.uk',
     'Frontend',
+    'boolean.co.uk',
+    'student',
     new Date('2024-01-01'),
     new Date('2024-06-01')
   );
@@ -168,9 +168,9 @@ async function seed() {
     'student10',
     'student10',
     '123',
-    'student',
-    'boolean.co.uk',
     'Frontend',
+    'boolean.co.uk',
+    'student',
     new Date('2024-01-01'),
     new Date('2024-06-01')
   );
@@ -179,15 +179,15 @@ async function seed() {
     'bjørg@demo.com',
     'Testpassword1!',
     cohort.id,
-    'Bjørg',
+    'Bjørg Astrid',
     'Kristiansen',
     'Hello, world!',
     'student11',
     'student11',
     '123',
-    'student',
-    'boolean.co.uk',
     'Frontend',
+    'boolean.co.uk',
+    'student',
     new Date('2024-01-01'),
     new Date('2024-06-01')
   );
@@ -196,15 +196,15 @@ async function seed() {
     'dennis@demo.com',
     'Testpassword1!',
     cohort.id,
-    'Dennis',
+    'Dennis Rizah Nordvi',
     'Osmani',
     'Hello, world!',
     'student12',
     'student12',
     '123',
-    'student',
-    'boolean.co.uk',
     'Frontend',
+    'boolean.co.uk',
+    'student',
     new Date('2024-01-01'),
     new Date('2024-06-01')
   );
@@ -219,9 +219,9 @@ async function seed() {
     'teacher1',
     'teacher1',
     '123',
-    'Scrum Master',
-    'boolean.co.uk',
     'Teacher',
+    'boolean.co.uk',
+    'Scrum Master',
     null,
     null,
     'TEACHER'
@@ -237,9 +237,9 @@ async function seed() {
     'teacher2',
     'teacher2',
     '123',
-    'Backend Lead',
-    'boolean.co.uk',
     'Teacher',
+    'boolean.co.uk',
+    'Backend Lead',
     null,
     null,
     'TEACHER'
@@ -255,13 +255,14 @@ async function seed() {
     'teacher3',
     'teacher3',
     '123',
-    'Frontend Lead',
-    'boolean.co.uk',
     'Teacher',
+    'boolean.co.uk',
+    'Frontend Lead',
     null,
     null,
     'TEACHER'
   );
+  
   
   await createPost(student.id, 'My first post!')
   await createPost(teacher.id, 'Hello, students')
