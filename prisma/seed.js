@@ -219,9 +219,9 @@ async function seed() {
     'teacher1',
     'teacher1',
     '123',
-    'Teacher',
-    'boolean.co.uk',
     'Scrum Master',
+    'boolean.co.uk',
+    'Teacher',
     null,
     null,
     'TEACHER'
@@ -237,9 +237,9 @@ async function seed() {
     'teacher2',
     'teacher2',
     '123',
-    'Teacher',
-    'boolean.co.uk',
     'Backend Lead',
+    'boolean.co.uk',
+    'Teacher',
     null,
     null,
     'TEACHER'
@@ -255,13 +255,14 @@ async function seed() {
     'teacher3',
     'teacher3',
     '123',
-    'Teacher',
-    'boolean.co.uk',
     'Frontend Lead',
+    'boolean.co.uk',
+    'Teacher',
     null,
     null,
     'TEACHER'
   );
+  
   
   
   await createPost(student.id, 'My first post!')
