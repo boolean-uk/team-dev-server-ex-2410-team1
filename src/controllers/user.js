@@ -114,6 +114,7 @@ export const updateById = async (req, res) => {
       'email',
       'bio',
       'githubUsername',
+      'username',
       'mobile',
       'specialism',
       'imageUrl',
