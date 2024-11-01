@@ -275,7 +275,9 @@ async function createPost(userId, content) {
   const post = await prisma.post.create({
     data: {
       userId,
-      content
+      content,
+      createdAt: new Date(),
+      updatedAt: new Date()
     },
     include: {
       user: true
