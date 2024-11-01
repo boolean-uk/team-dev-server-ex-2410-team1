@@ -17,7 +17,7 @@ async function seed() {
     'student1',
     '123',
     'Backend',
-    'boolean.co.uk',
+    'https://media.licdn.com/dms/image/v2/D4D03AQEAXArTC6TQ-Q/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1725097809658?e=1735776000&v=beta&t=NQnYHluxwC0K_-NDmKLvir0BrfcbcSvftEsQ48rSWc8',
     'student',
     new Date('2024-01-01'),
     new Date('2024-06-01')
@@ -34,7 +34,7 @@ async function seed() {
     'student2',
     '123',
     'Backend',
-    'boolean.co.uk',
+    'https://media.licdn.com/dms/image/v2/D4D03AQECTQ6TRzypTQ/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1694367157206?e=1735776000&v=beta&t=4t4xj4t0JWv7nX-w1lnJWphL_0Cy_DrhVbG_slDT5XM',
     'student',
     new Date('2024-01-01'),
     new Date('2024-06-01')
@@ -51,7 +51,7 @@ async function seed() {
     'student3',
     '123',
     'Backend',
-    'boolean.co.uk',
+    'https://media.licdn.com/dms/image/v2/D4D03AQESWi1yQmfFfg/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1723660660423?e=1735776000&v=beta&t=JnHxm8WqlsY9aSsRCq2c2XBsUmysECpAf77amzHUvCc',
     'student',
     new Date('2024-01-01'),
     new Date('2024-06-01')
@@ -68,7 +68,7 @@ async function seed() {
     'student4',
     '123',
     'Backend',
-    'boolean.co.uk',
+    'https://media.licdn.com/dms/image/v2/C4E03AQEypEuNOZh1ZQ/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1651827440844?e=1735776000&v=beta&t=qT0Rbh2V0NHe6N1O5xCNA4gXuCA_tEGEi8IOEVI6Ds0',
     'student',
     new Date('2024-01-01'),
     new Date('2024-06-01')
@@ -85,7 +85,7 @@ async function seed() {
     'student5',
     '123',
     'Backend',
-    'boolean.co.uk',
+    'https://media.licdn.com/dms/image/v2/D4D03AQHlDqDgOE2OkQ/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1690217117720?e=1735776000&v=beta&t=4SQlugQH3L9N6VUmY-ZJDpI9bhH-2QbnPIt9-DyliE8',
     'student',
     new Date('2024-01-01'),
     new Date('2024-06-01')
@@ -102,7 +102,7 @@ async function seed() {
     'student6',
     '123',
     'Backend Lead',
-    'boolean.co.uk',
+    'https://media.licdn.com/dms/image/v2/D4D03AQHH_OqIH6mJ1Q/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1723460091776?e=1735776000&v=beta&t=imKefcyXzRc0e4A7VLKoaACO7BAaAyb7E5h_Mo7-q4c',
     'student',
     new Date('2024-01-01'),
     new Date('2024-06-01')
@@ -119,7 +119,7 @@ async function seed() {
     'student7',
     '123',
     'Frontend',
-    'boolean.co.uk',
+    'https://media.licdn.com/dms/image/v2/D4D03AQHRUPCVou2C4g/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1723483300347?e=1735776000&v=beta&t=_UQtdWcNgQnJxLEDZNoubYey9yvNQ-s6XN-nl8g_Pbk',
     'student',
     new Date('2024-01-01'),
     new Date('2024-06-01')
@@ -136,7 +136,7 @@ async function seed() {
     'student8',
     '123',
     'Frontend',
-    'boolean.co.uk',
+    'https://media.licdn.com/dms/image/v2/C4D03AQGzCL4GomKvbg/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1662038102891?e=1735776000&v=beta&t=9oeWzSLDF3xxfe8I9jxK49iTo6NXZLbZd-tWogumxjA',
     'student',
     new Date('2024-01-01'),
     new Date('2024-06-01')
@@ -153,7 +153,7 @@ async function seed() {
     'student9',
     '123',
     'Frontend',
-    'boolean.co.uk',
+    'https://media.licdn.com/dms/image/v2/D4D03AQFYqe5vj1AZ9w/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1725540828056?e=1735776000&v=beta&t=MtYLA4GYiLBhviC1QJTnfbM93E-bwCqj0H7ugWnsB64',
     'student',
     new Date('2024-01-01'),
     new Date('2024-06-01')
@@ -170,7 +170,7 @@ async function seed() {
     'student10',
     '123',
     'Frontend',
-    'boolean.co.uk',
+    'https://media.licdn.com/dms/image/v2/D5603AQFhWtxCPvs_DQ/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1669677041719?e=1735776000&v=beta&t=8c53aZDen7ToGahtwvj_XJKtwQtkiXyHnYNYeYjktgE',
     'student',
     new Date('2024-01-01'),
     new Date('2024-06-01')
@@ -187,7 +187,7 @@ async function seed() {
     'student11',
     '123',
     'Frontend',
-    'boolean.co.uk',
+    'https://media.licdn.com/dms/image/v2/D4E03AQHa1bVb-6L_wQ/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1723642762955?e=1735776000&v=beta&t=VK-ZQQnjGjDsSJEb1pJg9_uR0a6UVEYKiN-5DhjtwSE',
     'student',
     new Date('2024-01-01'),
     new Date('2024-06-01')
@@ -204,7 +204,7 @@ async function seed() {
     'student12',
     '123',
     'Frontend',
-    'boolean.co.uk',
+    'https://media.licdn.com/dms/image/v2/D5603AQE8QAX-hq_67A/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1723529123424?e=1735776000&v=beta&t=ts2tuYh4giw5JdKz1rE_WjVswpCEuZI7FQKX9H1zYUA',
     'student',
     new Date('2024-01-01'),
     new Date('2024-06-01')
@@ -221,7 +221,7 @@ async function seed() {
     'teacher1',
     '123',
     'Scrum Master',
-    'boolean.co.uk',
+    'https://media.licdn.com/dms/image/v2/D4D03AQEw_RewUmC62Q/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1684242394452?e=1735776000&v=beta&t=m9GnWC7awwLX9vHnfFUpU4YJAzRUJk3K9Z2Xk8BqziY',
     'Teacher',
     null,
     null,
@@ -239,7 +239,7 @@ async function seed() {
     'teacher2',
     '123',
     'Backend Lead',
-    'boolean.co.uk',
+    'https://media.licdn.com/dms/image/v2/D4D03AQEBkGyLTbqYJw/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1723462758193?e=1735776000&v=beta&t=aUTf_UKFP-JmB4KOLKz0BseyQsPCQCQFkv6qtzB7UYs',
     'Teacher',
     null,
     null,
@@ -257,13 +257,29 @@ async function seed() {
     'teacher3',
     '123',
     'Frontend Lead',
-    'boolean.co.uk',
+    'https://media.licdn.com/dms/image/v2/D5603AQFUOJ0vZne8Ug/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1723483998765?e=1735776000&v=beta&t=HiclRzm6_S8gJJr2oFssu4jdwv9TtTDLenAB_5KP1-A',
     'Teacher',
     null,
     null,
     'TEACHER'
   )
 
+  await createUser(
+    'jonas@demo.com',
+    'Testpassword1!',
+    cohort2.id,
+    'Jonas Hoff',
+    'Halvorsen',
+    'Hello, world!',
+    'student13',
+    'student13',
+    '123',
+    'Backend',
+    'https://media.licdn.com/dms/image/v2/D4D03AQH_4wI774bixw/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1723481429401?e=1735776000&v=beta&t=9AmEXU6P8xIsqBZzPhpgkFvkoQ6W0M74ljGGTSZjaMw',
+    'student',
+    new Date('2024-01-01'),
+    new Date('2024-06-01')
+  )
 
   await createPost(student.id, 'My first post!')
   await createPost(teacher.id, 'Hello, students')
