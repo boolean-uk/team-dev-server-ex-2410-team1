@@ -3,12 +3,13 @@ import bcrypt from 'bcrypt'
 const prisma = new PrismaClient()
 
 async function seed() {
-  const cohort = await createCohort()
+  const cohort1 = await createCohort()
+  const cohort2 = await createCohort()
 
   const student = await createUser(
     'ibrahima@demo.com',
     'Testpassword1!',
-    cohort.id,
+    cohort1.id,
     'Ibrahima',
     'Secka',
     'Hello, world!',
@@ -20,12 +21,12 @@ async function seed() {
     'student',
     new Date('2024-01-01'),
     new Date('2024-06-01')
-  );
-  
+  )
+
   await createUser(
     'ali@demo.com',
     'Testpassword1!',
-    cohort.id,
+    cohort1.id,
     'Ali',
     'Yeganeh',
     'Hello, world!',
@@ -37,12 +38,12 @@ async function seed() {
     'student',
     new Date('2024-01-01'),
     new Date('2024-06-01')
-  );
-  
+  )
+
   await createUser(
     'herman@demo.com',
     'Testpassword1!',
-    cohort.id,
+    cohort1.id,
     'Herman',
     'Stornes',
     'Hello, world!',
@@ -54,12 +55,12 @@ async function seed() {
     'student',
     new Date('2024-01-01'),
     new Date('2024-06-01')
-  );
-  
+  )
+
   await createUser(
     'alikhan@demo.com',
     'Testpassword1!',
-    cohort.id,
+    cohort1.id,
     'Ali',
     'Khan',
     'Hello, world!',
@@ -71,12 +72,12 @@ async function seed() {
     'student',
     new Date('2024-01-01'),
     new Date('2024-06-01')
-  );
-  
+  )
+
   await createUser(
     'daniil@demo.com',
     'Testpassword1!',
-    cohort.id,
+    cohort1.id,
     'Daniil',
     'Panfilov',
     'Hello, world!',
@@ -88,12 +89,12 @@ async function seed() {
     'student',
     new Date('2024-01-01'),
     new Date('2024-06-01')
-  );
-  
+  )
+
   await createUser(
     'george@demo.com',
     'Testpassword1!',
-    cohort.id,
+    cohort1.id,
     'George Alexander',
     'Saveendra',
     'Hello, world!',
@@ -105,12 +106,12 @@ async function seed() {
     'student',
     new Date('2024-01-01'),
     new Date('2024-06-01')
-  );
-  
+  )
+
   await createUser(
     'julia@demo.com',
     'Testpassword1!',
-    cohort.id,
+    cohort1.id,
     'Julia',
     'Lindgren',
     'Hello, world!',
@@ -122,12 +123,12 @@ async function seed() {
     'student',
     new Date('2024-01-01'),
     new Date('2024-06-01')
-  );
-  
+  )
+
   await createUser(
     'kaja@demo.com',
     'Testpassword1!',
-    cohort.id,
+    cohort1.id,
     'Kaja',
     'Plaszko',
     'Hello, world!',
@@ -139,12 +140,12 @@ async function seed() {
     'student',
     new Date('2024-01-01'),
     new Date('2024-06-01')
-  );
-  
+  )
+
   await createUser(
     'dag@demo.com',
     'Testpassword1!',
-    cohort.id,
+    cohort1.id,
     'Dag Andreas',
     'Foss',
     'Hello, world!',
@@ -156,12 +157,12 @@ async function seed() {
     'student',
     new Date('2024-01-01'),
     new Date('2024-06-01')
-  );
-  
+  )
+
   await createUser(
     'melvin@demo.com',
     'Testpassword1!',
-    cohort.id,
+    cohort1.id,
     'Melvin',
     'Uthayaseelan',
     'Hello, world!',
@@ -173,12 +174,12 @@ async function seed() {
     'student',
     new Date('2024-01-01'),
     new Date('2024-06-01')
-  );
-  
+  )
+
   await createUser(
     'bjørg@demo.com',
     'Testpassword1!',
-    cohort.id,
+    cohort1.id,
     'Bjørg Astrid',
     'Kristiansen',
     'Hello, world!',
@@ -190,12 +191,12 @@ async function seed() {
     'student',
     new Date('2024-01-01'),
     new Date('2024-06-01')
-  );
-  
+  )
+
   await createUser(
     'dennis@demo.com',
     'Testpassword1!',
-    cohort.id,
+    cohort1.id,
     'Dennis Rizah Nordvi',
     'Osmani',
     'Hello, world!',
@@ -207,12 +208,12 @@ async function seed() {
     'student',
     new Date('2024-01-01'),
     new Date('2024-06-01')
-  );
-  
+  )
+
   const teacher = await createUser(
     'jostein@demo.com',
     'Testpassword1!',
-    cohort.id,
+    cohort1.id,
     'Jostein Ruen',
     'Sanchez',
     'Hello there!',
@@ -225,12 +226,12 @@ async function seed() {
     null,
     null,
     'TEACHER'
-  );
-  
+  )
+
   await createUser(
     'thomas@demo.com',
     'Testpassword1!',
-    cohort.id,
+    cohort1.id,
     'Thomas',
     'Flier',
     'thugger free',
@@ -243,12 +244,12 @@ async function seed() {
     null,
     null,
     'TEACHER'
-  );
-  
+  )
+
   await createUser(
     'john@demo.com',
     'Testpassword1!',
-    cohort.id,
+    cohort1.id,
     'John',
     'Abueg',
     'Hello there!',
@@ -261,10 +262,25 @@ async function seed() {
     null,
     null,
     'TEACHER'
-  );
-  
-  
-  
+  )
+
+  await createUser(
+    'jonas@demo.com',
+    'Testpassword1!',
+    cohort2.id,
+    'Jonas Hoff',
+    'Halvorsen',
+    'Hello, world!',
+    'student13',
+    'student13',
+    '123',
+    'Backend',
+    'boolean.co.uk',
+    'student',
+    new Date('2024-01-01'),
+    new Date('2024-06-01')
+  )
+
   await createPost(student.id, 'My first post!')
   await createPost(teacher.id, 'Hello, students')
 
