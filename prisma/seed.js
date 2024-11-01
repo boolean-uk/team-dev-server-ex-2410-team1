@@ -95,8 +95,8 @@ async function seed() {
     'george@demo.com',
     'Testpassword1!',
     cohort1.id,
-    'George Alexander',
-    'Saveendra',
+    'George',
+    'Saveedra',
     'Hello, world!',
     'student6',
     'student6',
@@ -146,7 +146,7 @@ async function seed() {
     'dag@demo.com',
     'Testpassword1!',
     cohort1.id,
-    'Dag Andreas',
+    'Dag',
     'Foss',
     'Hello, world!',
     'student9',
@@ -180,7 +180,7 @@ async function seed() {
     'bjørg@demo.com',
     'Testpassword1!',
     cohort1.id,
-    'Bjørg Astrid',
+    'Bjørg',
     'Kristiansen',
     'Hello, world!',
     'student11',
@@ -197,7 +197,7 @@ async function seed() {
     'dennis@demo.com',
     'Testpassword1!',
     cohort1.id,
-    'Dennis Rizah Nordvi',
+    'Dennis',
     'Osmani',
     'Hello, world!',
     'student12',
@@ -214,8 +214,8 @@ async function seed() {
     'jostein@demo.com',
     'Testpassword1!',
     cohort1.id,
-    'Jostein Ruen',
-    'Sanchez',
+    'Jostein',
+    'Ruen',
     'Hello there!',
     'teacher1',
     'teacher1',
@@ -291,7 +291,9 @@ async function createPost(userId, content) {
   const post = await prisma.post.create({
     data: {
       userId,
-      content
+      content,
+      createdAt: new Date(),
+      updatedAt: new Date()
     },
     include: {
       user: true
